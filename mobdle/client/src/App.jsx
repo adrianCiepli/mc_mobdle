@@ -1,7 +1,7 @@
 function App() {
   return (
     <div className="App">
-      <h1>Hello World!</h1>
+      <h1 className="main-title">Mobdle: Guess the Minecraft Mob</h1>
     </div>
   );
 }
