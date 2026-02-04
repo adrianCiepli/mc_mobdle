@@ -1,42 +1,127 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
+@import url('https://fonts.googleapis.com/css2?family=Chewy&family=Doto:wght@100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Jersey+10&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Tiny5&display=swap');
+
+.chewy-regular {
+  font-family: "Chewy", system-ui;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.doto-font {
+  font-family: "Doto", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 200;
+  font-style: normal;
+  font-variation-settings:
+    "ROND" 0;
+}
+
+.jersey-10-regular {
+  font-family: "Jersey 10", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.tiny5-regular {
+  font-family: "Tiny5", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.background-video {
+  right: 0;
+  bottom: 0;
+  min-width: 100%;
+  min-height: 100%;
+  z-index: -1;
+  position: fixed;
+  object-fit: cover;
+  user-select: none;
+  pointer-events: none;
+  filter: blur(3px) brightness(72%);
+}
+
+.title-area {
+  display: flex;
+  flex-direction: column;
+  margin-top: 100px;
+  align-items: center;
+  gap: 0;
+}
+
+.main-title {
+  line-height: 0.8;
+  font-size: 200px;
+  font-family: "Tiny5", sans-serif;
   text-align: center;
+  color: #AAAAAA; /* Main face: Light Gray */
+  margin-bottom: 0;
+  margin-top: 0;
+  animation: dropIn 1.8s ease-in-out forwards;
+  
+  /* The "Bevel & Pop" Logic */
+  text-shadow: 
+    /* 1. Light highlight (Top-Left) makes it pop */
+    -2px -2px 0px #DDD, 
+    
+    /* 2. Dark Gray depth (Bottom & Right) */
+    2px 2px 0px #555, 
+    4px 4px 0px #555, 
+    
+    /* 3. Final Black Silhouette (Far Bottom-Right) */
+    6px 6px 0px #000,
+    8px 8px 0px #000;
+    
+  /* Optional: Stronger contrast for the font */
+  letter-spacing: 4px;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+.under-title {
+  opacity: 0;
+  margin-top: 0;
+  margin-bottom: 0;
+  font-size: 30px;
+  font-family: "Tiny5", sans-serif;
+  color: yellow;
+  animation: fadeIn 1.5s ease-in-out forwards 1.8s,
+              pulse 2s infinite ease-in-out 1.8s;
+  margin-left: 600px;
+  rotate: 15deg;
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
+.guess-area {
+  opacity: 0;
+  margin-top: 180px;
+  display: flex;
+  justify-content: center;
+  animation: fadeIn 1.5s ease-in-out forwards 2.0s
+}
+
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
   }
-  to {
-    transform: rotate(360deg);
+
+  100% {
+    opacity: 1;
   }
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
+@keyframes dropIn {
+  0% {
+    opacity: 0;
+    transform: translateY(-50px); /* Starts 50px higher */
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);    /* Ends at its natural position */
   }
 }
 
-.card {
-  padding: 2em;
-}
-
-.read-the-docs {
-  color: #888;
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(0.95); }
+  100% { transform: scale(1); }
 }

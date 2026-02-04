@@ -1,0 +1,6 @@
+.Dropdown {
+    display: flex;
+    flex-direction: column;
+    gap: 0px;
+    background-color: gray;
+}
