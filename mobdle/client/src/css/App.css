@@ -52,7 +52,7 @@
 
 .main-title {
   line-height: 0.8;
-  font-size: 200px;
+  font-size: 140px;
   font-family: "Tiny5", sans-serif;
   text-align: center;
   color: #AAAAAA; /* Main face: Light Gray */
@@ -81,7 +81,7 @@
   opacity: 0;
   margin-top: 0;
   margin-bottom: 0;
-  font-size: 30px;
+  font-size: 20px;
   font-family: "Tiny5", sans-serif;
   color: yellow;
   animation: fadeIn 1.5s ease-in-out forwards 1.8s,
@@ -92,10 +92,19 @@
 
 .guess-area {
   opacity: 0;
-  margin-top: 180px;
+  margin-top: 80px;
+  margin-bottom: 50px;
   display: flex;
   justify-content: center;
-  animation: fadeIn 1.5s ease-in-out forwards 2.0s
+  animation: fadeIn 1.5s ease-in-out forwards 2.0s;
+  z-index: 2;
+}
+
+.guess-display {
+  display: flex;
+  justify-content: center;
+  animation: fadeIn 1.5s ease-in-out forwards 2.0s;
+  z-index: 1;
 }
 
 

@@ -1,30 +1,26 @@
-import { useState } from "react-dom/client";
+import { useState, useRef, useEffect } from "react";
 import './css/TextGuess.css';
 
-function TextGuess({ userGuess, setUserGuess, setInTextArea }) {
+function TextGuess({ textContent, inGuessArea, setTextContent, handleSubmit }) {
     {/* Should be simple thing for accepting text input */}
-
-    const handleSubmit = (e) => {
-        e.preventDefault();
-    }
+    // To access an HTML element, we need to do this, attach the variable via 'ref' attribute to the element, then reference as textInput.current in our JS code
+    const inputElement = useRef();
 
     const onChange = (e) => {
         {/*e is the event object that is passed into an event handler func, e.target returns HTML element that triggered event, .value gives its string value*/}
-        setUserGuess(e.target.value);
+        setTextContent(e.target.value)
     }
 
-    const handleFocus = (e) => {
-        setInTextArea(true);
-    }
-
-    const handleBlur = (e) => {
-        setInTextArea(false);
-    }
+    useEffect(() => {
+        if (!inGuessArea) {
+            inputElement.current.blur();
+        }
+    }, [inGuessArea])
 
     return (
         <div className="TextGuess">
-            <form onSubmit={handleSubmit}>
-                <input className="input-area" type="text" value={userGuess} placeholder="Enter your guess..." onChange={onChange} onFocus={handleFocus} onBlur={handleBlur} />
+            <form onSubmit={(e) => {handleSubmit(e, textContent)}}>
+                <input className="input-area" type="text" value={textContent} placeholder="Enter your guess..." onChange={onChange} ref={inputElement} />
             </form>
         </div>
     )

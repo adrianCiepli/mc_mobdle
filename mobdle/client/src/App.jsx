@@ -1,9 +1,11 @@
 import './css/App.css';
 import GuessArea from "./GuessArea";
 import bgVideo from "./assets/minecraft_bg1.mp4";
+import GuessDisplay from './GuessDisplay';
 
 
 function App() {
+
   return (
     <div className="App">
       <video autoPlay muted loop playsInline className='background-video'>
@@ -15,6 +17,9 @@ function App() {
       </div>
       <div className='guess-area'>
         <GuessArea />
+      </div>
+      <div className='guess-display'>
+        <GuessDisplay />
       </div>
     </div>
   );
