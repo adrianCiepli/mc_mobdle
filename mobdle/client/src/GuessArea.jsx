@@ -3,18 +3,15 @@ import Dropdown from "./Dropdown";
 import { useState, useEffect } from "react";
 import mobs from "./data/mobs.js";
 
-function GuessArea() {
+function GuessArea({guesses, setGuesses}) {
     {/* Have a text field and a dropdown option that changes dynamically with typing */}
     const [inGuessArea, setInGuessArea] = useState(false);
     const [textContent, setTextContent] = useState("");
-    const [guesses, setGuesses] = useState([]);
 
-    let mobOptions = [];
-    for (let i=0; i < mobs.length; i++) {
-        if (mobs[i].name.toLowerCase().includes(textContent)) {
-            mobOptions.push(mobs[i].name);
-        }
-    }
+    // Object.keys(dictVar) returns list of all keys of the dictionary
+    // List.filter(predicateFunc) will run the predicate for every item and can use item as param, and returns new list of items for which predicate was true on running
+    let mobOptions = Object.keys(mobs).filter((mobName) => {return mobName.toLowerCase().includes(textContent)});
+
     /**
      * On refresh, React runs everything from scratch, so states get reset to defaults and the renders that happen right after the refresh are the intial renders.
      */
@@ -52,10 +49,23 @@ function GuessArea() {
                 console.log("Already guessed: " + value)
             } else {
                 console.log("Submitted guess: " + value);
+                /*
+                THIS IS WRONG
                 let temp = guesses;
                 temp.push(value);
                 setGuesses(temp);
-                localStorage.guesses = JSON.stringify(temp);
+                React recognizes a state-change and re-renders when an object's reference (address) changes, but here it doesn't
+                So, even though we call setGuesses to trigger a state update, we technically keep the address while changing data, so yes the variable is different and state
+                update is correct, but components like GuessDisplay which rely on guesses update causing re-render will not re-render
+
+                REACT RULE: never mutate state
+                - state is immutable, if you want to change it, you don't edit the existing state, you replace it with brand new one to update what's on screen
+
+                So, we need to assign a new array to guesses with the same content and one additional value, as done below:
+                */
+                setGuesses([...guesses, value]);
+                localStorage.guesses = JSON.stringify(guesses);
+                setTextContent("");
             }
         } else {
             console.log("Submission rejected")

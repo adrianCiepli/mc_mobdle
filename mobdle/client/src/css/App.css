@@ -93,7 +93,7 @@
 .guess-area {
   opacity: 0;
   margin-top: 80px;
-  margin-bottom: 50px;
+  margin-bottom: 10px;
   display: flex;
   justify-content: center;
   animation: fadeIn 1.5s ease-in-out forwards 2.0s;
@@ -101,6 +101,7 @@
 }
 
 .guess-display {
+  opacity: 0;
   display: flex;
   justify-content: center;
   animation: fadeIn 1.5s ease-in-out forwards 2.0s;

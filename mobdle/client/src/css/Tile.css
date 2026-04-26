@@ -1,0 +1,55 @@
+.Tile {
+    height: 100%;
+    width: 100%;
+    border-width: 2px;
+    border-color: white;
+    margin: 0;
+}
+
+.text {
+    font-size: 20px;
+    text-align: center;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+.correct {
+    background-color: green;
+}
+
+.wrong {
+    background-color: red;
+    margin: 0;
+}
+
+.close {
+    background-color: yellow
+}
+
+.close.downarrow {
+    background-image: url(/yellowarrowdown.png);
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+}
+
+.close.uparrow {
+    background-image: url(/yellowarrowup.png);
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+}
+
+.wrong.downarrow {
+    background-image: url(/redarrowdown.png);
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+}
+
+.wrong.uparrow {
+    background-image: url(/redarrowup.png);
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+}
