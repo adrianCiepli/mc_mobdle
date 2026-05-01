@@ -3,10 +3,11 @@ import Dropdown from "./Dropdown";
 import { useState, useEffect } from "react";
 import mobs from "./data/mobs.js";
 
-function GuessArea({guesses, setGuesses}) {
+function GuessArea({guesses, setGuesses, answer}) {
     {/* Have a text field and a dropdown option that changes dynamically with typing */}
     const [inGuessArea, setInGuessArea] = useState(false);
     const [textContent, setTextContent] = useState("");
+    const [disabled, setDisabled] = useState(false);
 
     // Object.keys(dictVar) returns list of all keys of the dictionary
     // List.filter(predicateFunc) will run the predicate for every item and can use item as param, and returns new list of items for which predicate was true on running
@@ -63,9 +64,14 @@ function GuessArea({guesses, setGuesses}) {
 
                 So, we need to assign a new array to guesses with the same content and one additional value, as done below:
                 */
-                setGuesses([...guesses, value]);
-                localStorage.guesses = JSON.stringify(guesses);
+                const newGuesses = [value, ...guesses];
+                setGuesses(newGuesses);
+                localStorage.guesses = JSON.stringify(newGuesses);
                 setTextContent("");
+                if (value === answer.toLowerCase()) {
+                    console.log("Correct!");
+                    setDisabled(true);
+                }
             }
         } else {
             console.log("Submission rejected")
@@ -83,7 +89,7 @@ function GuessArea({guesses, setGuesses}) {
 
     return (
         <div className="GuessArea" onFocus={handleFocus} onBlur={handleBlur} >
-            <TextGuess textContent={textContent} inGuessArea={inGuessArea} setTextContent={setTextContent} handleSubmit={handleSubmit} />
+            <TextGuess textContent={textContent} inGuessArea={inGuessArea} setTextContent={setTextContent} handleSubmit={handleSubmit} disabled={disabled} />
             <Dropdown inGuessArea={inGuessArea} textContent={textContent} handleSubmit={handleSubmit} mobOptions={mobOptions} />
         </div>
     )

@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect } from "react";
 import './css/TextGuess.css';
 
-function TextGuess({ textContent, inGuessArea, setTextContent, handleSubmit }) {
+function TextGuess({ textContent, inGuessArea, setTextContent, handleSubmit, disabled }) {
     {/* Should be simple thing for accepting text input */}
     // To access an HTML element, we need to do this, attach the variable via 'ref' attribute to the element, then reference as textInput.current in our JS code
     const inputElement = useRef();
@@ -20,7 +20,7 @@ function TextGuess({ textContent, inGuessArea, setTextContent, handleSubmit }) {
     return (
         <div className="TextGuess">
             <form onSubmit={(e) => {handleSubmit(e, textContent)}}>
-                <input className="input-area" type="text" value={textContent} placeholder="Enter your guess..." onChange={onChange} ref={inputElement} />
+                <input className="input-area" type="text" value={textContent} placeholder="Enter your guess..." onChange={onChange} ref={inputElement} disabled={disabled} />
             </form>
         </div>
     )

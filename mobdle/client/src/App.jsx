@@ -7,7 +7,7 @@ import {useState, useEffect} from "react";
 
 function App() {
   const [guesses, setGuesses] = useState([]);
-  const answer = "Allay";
+  const answer = "Sniffer";
 
   return (
     <div className="App">
@@ -20,7 +20,7 @@ function App() {
         <img src='/title_text.png' className='main-title' style={{width: '30%', height: '35%'}}/>
       </div>
       <div className='guess-area'>
-        <GuessArea guesses={guesses} setGuesses={setGuesses} />
+        <GuessArea guesses={guesses} setGuesses={setGuesses} answer={answer} />
       </div>
       <div className='guess-display'>
         <GuessDisplay guesses={guesses} setGuesses={setGuesses} answer={answer} />
