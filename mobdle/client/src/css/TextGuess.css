@@ -21,9 +21,67 @@
     font-family: "Tiny5", sans-serif;
     background-color: black;
     color: white;
-    border-color: white;
+    outline: 2px solid white; /* Border adds it to outside of element's content area, outline does not */
+    box-shadow: none;
+    transition: box-shadow 0.15s linear;
 }
 
-.input-area:focus {
-     outline: none;
+.input-area:focus { /* outline property tends to be quite choppy, box shadow is smoother */
+     box-shadow: 0 0 0 5px white;
 }
+
+/*
+CSS transitions: putting on base class means it automatically animates any property change, including when a class is added or removed or pseudoclass (:focus, :hover).
+This means if JavaScript puts another class onto this class, or removes, and we have something like:
+.box {
+    opacity: 1;
+    transition: opacity 0.3s ease;
+}
+.box.hidden {
+    opacity: 0;
+}
+We can do .box.hidden or just .hidden, then as long as the element has .box, adding .hidden or removing it will trigger transition because the .box has any opacity change
+
+On base class: transition: [property] [duration] [easing] [delay];
+Can also do multiple on one class: transition: width 0.3s ease, background-color 0.5s ease;
+
+Easings:
+ease — slow in, fast middle, slow out (default)
+linear — constant speed
+ease-in — starts slow
+ease-out — ends slow
+ease-in-out — slow on both ends
+cubic-bezier(x1,y1,x2,y2) — custom curve
+
+@keyframes <name> will define your own custom transition, where instead you then use animation not transition:
+@keyframes pulse {
+    0%   { transform: scale(1); }
+    50%  { transform: scale(1.2); }
+    100% { transform: scale(1); }
+}
+
+.box {
+    animation: pulse 1s ease-in-out infinite;
+}
+
+animation: [name] [duration] [easing] [delay] [iteration-count] [direction] [fill-mode] [play-state]; only name duration required
+name: matches your @keyframes name
+duration: 1s, 200ms
+easing: ease, linear, ease-in-out, cubic-bezier(...)
+delay: 0.2s, 500ms
+iteration-count: 1, 3, infinite
+direction: normal, reverse, alternate, alternate-reverse
+fill-mode: none, forwards (stays at 100%), backwards, both 
+play-state: running, paused
+
+
+
+Box shadow:
+box-shadow: [h-offset] [v-offset] [blur] [spread] [color] [inset];
+h-offset:   Required. Horizontal position. Positive values move the shadow right; negative move it left.
+v-offset:   Required. Vertical position. Positive values move the shadow down; negative move it up.
+blur:       Optional. The higher the number, the blurrier and larger the shadow becomes. Default is 0 (sharp).
+spread:     Optional. Increases or decreases the size of the shadow. Positive expands it; negative shrinks it.
+color:      Optional. Defines shadow color (Hex, RGB, etc.). If omitted, it defaults to the element's text color.
+inset:      Optional. Changes the shadow from an outer drop shadow to an inner shadow.
+*/

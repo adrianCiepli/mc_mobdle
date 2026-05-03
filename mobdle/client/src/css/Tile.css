@@ -1,18 +1,25 @@
 .Tile {
-    height: 100%;
     width: 100%;
-    border-width: 2px;
-    border-color: white;
+    aspect-ratio: 1/1;
     margin: 0;
+    border: 2px solid rgb(199, 198, 198);
 }
 
-.text {
+p.text {
     font-size: 20px;
     text-align: center;
     padding-top: 20px;
     padding-bottom: 20px;
     padding-left: 3px;
     padding-right: 3px;
+}
+
+.correct, .wrong, .close {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .correct {

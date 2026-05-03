@@ -37,10 +37,10 @@ const mobs = {
 
   // NEUTRAL MOBS
   "Bee": { dimension: "Overworld", hostility: "Neutral", hp: 2.5, movement: "Flying", height: 0.6, tameable: false, releaseVersion: "1.15" },
-  "Cave Spider": { dimension: "Overworld", hostility: "Neutral", hp: 3, movement: "Climbing", height: 0.5, tameable: false, releaseVersion: "1.0" },
+  "Cave Spider": { dimension: "Overworld", hostility: "Neutral", hp: 3, movement: "Walking,Climbing", height: 0.5, tameable: false, releaseVersion: "1.0" },
   "Crab": { dimension: "Overworld", hostility: "Neutral", hp: 3, movement: "Walking", height: 0.5, tameable: false, releaseVersion: "1.22" },
   "Dolphin": { dimension: "Overworld", hostility: "Neutral", hp: 2.5, movement: "Swimming", height: 0.6, tameable: false, releaseVersion: "1.13" },
-  "Enderman": { dimension: "Any", hostility: "Neutral", hp: 10, movement: "Walking", height: 2.9, tameable: false, releaseVersion: "1.0" },
+  "Enderman": { dimension: "Any", hostility: "Neutral", hp: 10, movement: "Teleport,Walking", height: 2.9, tameable: false, releaseVersion: "1.0" },
   "Fox": { dimension: "Overworld", hostility: "Neutral", hp: 2.5, movement: "Walking", height: 0.7, tameable: false, releaseVersion: "1.14" },
   "Goat": { dimension: "Overworld", hostility: "Neutral", hp: 2.5, movement: "Jumping", height: 0.9, tameable: false, releaseVersion: "1.17" },
   "Iron Golem": { dimension: "Overworld", hostility: "Neutral", hp: 25, movement: "Walking", height: 2.7, tameable: false, releaseVersion: "1.2.1" },
@@ -48,7 +48,7 @@ const mobs = {
   "Panda": { dimension: "Overworld", hostility: "Neutral", hp: 5, movement: "Walking", height: 1.25, tameable: false, releaseVersion: "1.14" },
   "Piglin": { dimension: "Nether", hostility: "Neutral", hp: 4, movement: "Walking", height: 1.95, tameable: false, releaseVersion: "1.16" },
   "Polar Bear": { dimension: "Overworld", hostility: "Neutral", hp: 7.5, movement: "Walking", height: 1.4, tameable: false, releaseVersion: "1.10" },
-  "Spider": { dimension: "Overworld", hostility: "Neutral", hp: 4, movement: "Climbing", height: 0.9, tameable: false, releaseVersion: "1.0" },
+  "Spider": { dimension: "Overworld", hostility: "Neutral", hp: 4, movement: "Walking,Climbing", height: 0.9, tameable: false, releaseVersion: "1.0" },
   "Wolf": { dimension: "Overworld", hostility: "Neutral", hp: 2, movement: "Walking", height: 0.85, tameable: true, releaseVersion: "1.0" },
   "Zombified Piglin": { dimension: "Nether", hostility: "Neutral", hp: 5, movement: "Walking", height: 1.95, tameable: false, releaseVersion: "1.16" },
 
@@ -70,7 +70,7 @@ const mobs = {
   "Piglin Brute": { dimension: "Nether", hostility: "Hostile", hp: 12.5, movement: "Walking", height: 1.95, tameable: false, releaseVersion: "1.16" },
   "Pillager": { dimension: "Overworld", hostility: "Hostile", hp: 6, movement: "Walking", height: 1.95, tameable: false, releaseVersion: "1.14" },
   "Ravager": { dimension: "Overworld", hostility: "Hostile", hp: 25, movement: "Walking", height: 2.2, tameable: false, releaseVersion: "1.14" },
-  "Shulker": { dimension: "End", hostility: "Hostile", hp: 7.5, movement: "Stationary", height: 1.0, tameable: false, releaseVersion: "1.9" },
+  "Shulker": { dimension: "End", hostility: "Hostile", hp: 7.5, movement: "Teleport,Stationary", height: 1.0, tameable: false, releaseVersion: "1.9" },
   "Silverfish": { dimension: "Overworld", hostility: "Hostile", hp: 2, movement: "Walking", height: 0.3, tameable: false, releaseVersion: "1.0" },
   "Skeleton": { dimension: "Overworld,Nether", hostility: "Hostile", hp: 5, movement: "Walking", height: 1.99, tameable: false, releaseVersion: "1.0" },
   "Slime": { dimension: "Overworld", hostility: "Hostile", hp: 4, movement: "Jumping", height: 2.04, tameable: false, releaseVersion: "1.0" },
