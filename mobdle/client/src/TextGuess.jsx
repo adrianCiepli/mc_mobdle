@@ -14,6 +14,8 @@ function TextGuess({ textContent, inGuessArea, setTextContent, handleSubmit, dis
     useEffect(() => {
         if (!inGuessArea) {
             inputElement.current.blur();
+        } else {
+            inputElement.current.focus();
         }
     }, [inGuessArea])
 

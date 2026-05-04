@@ -4,7 +4,7 @@ const mobs = {
   // PASSIVE MOBS
   "Allay": { dimension: "Overworld", hostility: "Passive", hp: 5, movement: "Flying", height: 0.6, tameable: false, releaseVersion: "1.19" },
   "Armadillo": { dimension: "Overworld", hostility: "Passive", hp: 3, movement: "Walking", height: 0.65, tameable: false, releaseVersion: "1.20.5" },
-  "Axolotl": { dimension: "Overworld", hostility: "Passive", hp: 3.5, movement: "Swimming", height: 0.42, tameable: true, releaseVersion: "1.17" },
+  "Axolotl": { dimension: "Overworld", hostility: "Passive", hp: 3.5, movement: "Walking,Swimming", height: 0.42, tameable: true, releaseVersion: "1.17" },
   "Bat": { dimension: "Overworld", hostility: "Passive", hp: 1.5, movement: "Flying", height: 0.9, tameable: false, releaseVersion: "1.4.2" },
   "Camel": { dimension: "Overworld", hostility: "Passive", hp: 8, movement: "Walking", height: 2.375, tameable: true, releaseVersion: "1.20" },
   "Cat": { dimension: "Overworld", hostility: "Passive", hp: 2.5, movement: "Walking", height: 0.7, tameable: true, releaseVersion: "1.14" },
@@ -31,7 +31,7 @@ const mobs = {
   "Strider": { dimension: "Nether", hostility: "Passive", hp: 5, movement: "Walking", height: 1.7, tameable: true, releaseVersion: "1.16" },
   "Tadpole": { dimension: "Overworld", hostility: "Passive", hp: 1.5, movement: "Swimming", height: 0.3, tameable: false, releaseVersion: "1.19" },
   "Tropical Fish": { dimension: "Overworld", hostility: "Passive", hp: 1.5, movement: "Swimming", height: 0.4, tameable: false, releaseVersion: "1.13" },
-  "Turtle": { dimension: "Overworld", hostility: "Passive", hp: 7.5, movement: "Walking", height: 0.4, tameable: false, releaseVersion: "1.13" },
+  "Turtle": { dimension: "Overworld", hostility: "Passive", hp: 7.5, movement: "Swimming,Walking", height: 0.4, tameable: false, releaseVersion: "1.13" },
   "Villager": { dimension: "Overworld", hostility: "Passive", hp: 5, movement: "Walking", height: 1.95, tameable: false, releaseVersion: "1.0" },
   "Wandering Trader": { dimension: "Overworld", hostility: "Passive", hp: 5, movement: "Walking", height: 1.95, tameable: false, releaseVersion: "1.14" },
 
@@ -42,7 +42,7 @@ const mobs = {
   "Dolphin": { dimension: "Overworld", hostility: "Neutral", hp: 2.5, movement: "Swimming", height: 0.6, tameable: false, releaseVersion: "1.13" },
   "Enderman": { dimension: "Any", hostility: "Neutral", hp: 10, movement: "Teleport,Walking", height: 2.9, tameable: false, releaseVersion: "1.0" },
   "Fox": { dimension: "Overworld", hostility: "Neutral", hp: 2.5, movement: "Walking", height: 0.7, tameable: false, releaseVersion: "1.14" },
-  "Goat": { dimension: "Overworld", hostility: "Neutral", hp: 2.5, movement: "Jumping", height: 0.9, tameable: false, releaseVersion: "1.17" },
+  "Goat": { dimension: "Overworld", hostility: "Neutral", hp: 2.5, movement: "Walking,Jumping", height: 0.9, tameable: false, releaseVersion: "1.17" },
   "Iron Golem": { dimension: "Overworld", hostility: "Neutral", hp: 25, movement: "Walking", height: 2.7, tameable: false, releaseVersion: "1.2.1" },
   "Llama": { dimension: "Overworld", hostility: "Neutral", hp: 7.5, movement: "Walking", height: 1.875, tameable: true, releaseVersion: "1.11" },
   "Panda": { dimension: "Overworld", hostility: "Neutral", hp: 5, movement: "Walking", height: 1.25, tameable: false, releaseVersion: "1.14" },

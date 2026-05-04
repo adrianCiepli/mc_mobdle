@@ -2,7 +2,7 @@
     width: 100%;
     aspect-ratio: 1/1;
     margin: 0;
-    border: 2px solid rgb(199, 198, 198);
+    
 }
 
 p.text {
@@ -12,6 +12,7 @@ p.text {
     padding-bottom: 20px;
     padding-left: 3px;
     padding-right: 3px;
+    user-select: none;
 }
 
 .correct, .wrong, .close {
@@ -20,6 +21,12 @@ p.text {
     display: flex;
     align-items: center;
     justify-content: center;
+    border: 2px solid rgb(199, 198, 198);
+    transition: transform 0.2s ease;
+}
+
+.correct:hover, .wrong:hover, .close:hover {
+    transform: translateY(-8px);
 }
 
 .correct {

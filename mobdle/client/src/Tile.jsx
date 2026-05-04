@@ -17,6 +17,8 @@ function Tile({type, value, correctness, special}) {
         classString = "close uparrow";
     } else if (correctness === "low-far") {
         classString = "wrong uparrow";
+    } else {
+        classString = "close";
     }
 
     return (

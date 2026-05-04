@@ -26,7 +26,7 @@ const { initialMount } = obj; // undefined, there's no "initialMount" key, since
 */
 
 
-function GuessDisplay({guesses, setGuesses, answer}) {
+function GuessDisplay({guesses, setGuesses, answer, ANIMATIONTIME}) {
     const mountCount = useRef(0);
     const initialMount = useRef(true);
 
@@ -60,9 +60,45 @@ function GuessDisplay({guesses, setGuesses, answer}) {
                 
                 // Format: // name, dimension, hostility, hp, movement, height, tameable, releaseVersion
                 const name = cguess === answer ? "eq" : "neq";
-                const dimension = ans.dimension === g.dimension ? "eq" : "neq";
+
+                // Dimension matching
+                let dimension = "";
+                const ansdims = ans.dimension.split(",");
+                const gdims = g.dimension.split(",");
+                let matches = 0;
+                for (const dim of gdims) {
+                    if (ansdims.includes(dim)) {
+                        matches += 1;
+                    }
+                }
+                if (matches === ansdims.length && matches === gdims.length) {
+                    dimension = "eq";
+                } else if (matches > 0 || g.dimension === "Any") {
+                    dimension = "close";
+                } else {
+                    dimension = "neq";
+                }
+
                 const hostility = ans.hostility === g.hostility ? "eq" : "neq";
-                const movement = ans.movement === g.movement ? "eq" : "neq";
+
+                // Movement matching
+                let movement = "";
+                const ansmove = ans.movement.split(",");
+                const gmove = g.movement.split(",");
+                matches = 0;
+                for (const move of gmove) {
+                    if (ansmove.includes(move)) {
+                        matches += 1;
+                    }
+                }
+                if (matches === ansmove.length && matches === gmove.length) {
+                    movement = "eq";
+                } else if (matches > 0) {
+                    movement = "close";
+                } else {
+                    movement = "neq";
+                }
+
                 const tameable = ans.tameable === g.tameable ? "eq" : "neq";
 
                 let hp = "";
@@ -135,19 +171,20 @@ function GuessDisplay({guesses, setGuesses, answer}) {
                 // Format: // name, dimension, hostility, hp, movement, height, tameable, releaseVersion
                 // Since the index of the first is always 0, don't use as key since doing so means React sees this first element on key=(index=0) as the same element on re-render
                 // where the class has not changed, it has .tile-flip on previous render and now the same, so the animation does not trigger since class is constant on render
+                const interval = (ANIMATIONTIME - 1) / 7;
                 if (index === 0) {
                     return (
                         <div className="row" key={guesses.length - index}>
-                            <div className={lastTile} style={{animationDelay: "0s"}}><Tile type={"r/w"} value={cguess} correctness={name} special={""}/></div>
-                            <div className={lastTile} style={{animationDelay: "0.5s"}}><Tile type={"r/w"} value={g.dimension.split(",").join(", ")} correctness={dimension} special={""}/></div>
-                            <div className={lastTile} style={{animationDelay: "1s"}}><Tile type={"r/w"} value={g.hostility} correctness={hostility} special={""} /></div>
-                            <div className={lastTile} style={{animationDelay: "1.5s"}}><Tile type={"h/l"} value={g.hp} correctness={hp} special={"heart"} /></div>
+                            <div className={lastTile} style={{animationDelay: `${interval * 0}s`}}><Tile type={"r/w"} value={cguess} correctness={name} special={""}/></div>
+                            <div className={lastTile} style={{animationDelay: `${interval * 1}s`}}><Tile type={"r/w"} value={g.dimension.split(",").join(", ")} correctness={dimension} special={""}/></div>
+                            <div className={lastTile} style={{animationDelay: `${interval * 2}s`}}><Tile type={"r/w"} value={g.hostility} correctness={hostility} special={""} /></div>
+                            <div className={lastTile} style={{animationDelay: `${interval * 3}s`}}><Tile type={"h/l"} value={g.hp} correctness={hp} special={"heart"} /></div>
                             {/* Passing array in makes React just mash all items into one string, so we turn into string ourselves*/}
                             {/* See Tile.jsx for additional comments */}
-                            <div className={lastTile} style={{animationDelay: "2s"}}><Tile type={"r/w"} value={g.movement.split(",").join(", ")} correctness={movement} special={""} /></div>
-                            <div className={lastTile} style={{animationDelay: "2.5s"}}><Tile type={"h/l"} value={g.height} correctness={height} special={"height"} /></div>
-                            <div className={lastTile} style={{animationDelay: "3s"}}><Tile type={"r/w"} value={g.tameable} correctness={tameable} special={"tameable"} /></div>
-                            <div className={lastTile} style={{animationDelay: "3.5s"}}><Tile type={"h/l"} value={g.releaseVersion} correctness={release} special={""} /></div>
+                            <div className={lastTile} style={{animationDelay: `${interval * 4}s`}}><Tile type={"r/w"} value={g.movement.split(",").join(", ")} correctness={movement} special={""} /></div>
+                            <div className={lastTile} style={{animationDelay: `${interval * 5}s`}}><Tile type={"h/l"} value={g.height} correctness={height} special={"height"} /></div>
+                            <div className={lastTile} style={{animationDelay: `${interval * 6}s`}}><Tile type={"r/w"} value={g.tameable} correctness={tameable} special={"tameable"} /></div>
+                            <div className={lastTile} style={{animationDelay: `${interval * 7}s`}}><Tile type={"h/l"} value={g.releaseVersion} correctness={release} special={""} /></div>
                         </div>
                     )  
                 } else {

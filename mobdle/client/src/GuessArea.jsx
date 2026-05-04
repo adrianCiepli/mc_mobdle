@@ -2,16 +2,17 @@ import TextGuess from "./TextGuess";
 import Dropdown from "./Dropdown";
 import { useState, useEffect } from "react";
 import mobs from "./data/mobs.js";
+import confetti from "canvas-confetti";
 
-function GuessArea({guesses, setGuesses, answer}) {
-    {/* Have a text field and a dropdown option that changes dynamically with typing */}
+function GuessArea({ guesses, setGuesses, answer, ANIMATIONTIME }) {
+    {/* Have a text field and a dropdown option that changes dynamically with typing */ }
     const [inGuessArea, setInGuessArea] = useState(false);
     const [textContent, setTextContent] = useState("");
     const [disabled, setDisabled] = useState(false);
 
     // Object.keys(dictVar) returns list of all keys of the dictionary
     // List.filter(predicateFunc) will run the predicate for every item and can use item as param, and returns new list of items for which predicate was true on running
-    let mobOptions = Object.keys(mobs).filter((mobName) => {return mobName.toLowerCase().includes(textContent)});
+    let mobOptions = Object.keys(mobs).filter((mobName) => { return mobName.toLowerCase().includes(textContent.toLowerCase()) });
 
     /**
      * On refresh, React runs everything from scratch, so states get reset to defaults and the renders that happen right after the refresh are the intial renders.
@@ -27,56 +28,69 @@ function GuessArea({guesses, setGuesses, answer}) {
         }
     }, [])
 
+    const playConfetti = () => {
+        var duration = 2 * 1000; // ms
+        var animationEnd = Date.now() + duration;
+        var defaults = { startVelocity: 30, spread: 360, ticks: 60, zIndex: 0 };
+
+        function randomInRange(min, max) {
+            return Math.random() * (max - min) + min;
+        }
+
+        var interval = setInterval(function () { // runs function repeatedly on ms interval, starting at 0
+            var timeLeft = animationEnd - Date.now();
+
+            if (timeLeft <= 0) {
+                return clearInterval(interval); // this is why we store interval variable, so we can force stop the repeated execution
+            }
+
+            var particleCount = 100 * (timeLeft / duration);
+            // since particles fall down, start a bit higher than random
+            confetti({ ...defaults, particleCount, origin: { x: randomInRange(0.1, 0.3), y: Math.random() - 0.2 } });
+            confetti({ ...defaults, particleCount, origin: { x: randomInRange(0.7, 0.9), y: Math.random() - 0.2 } });
+        }, 250);
+    }
+
     const handleSubmit = (e, value) => {
         e.preventDefault();
         value = value.toLowerCase();
         let isSpecific = false;
-
         // Covers the case that you click on an option when there's only one, and when you type enough to only match one mob
         if (mobOptions.length === 1) {
             value = mobOptions[0].toLowerCase();
         }
-
         // Use isSpecific to see if an option was clicked or if full name was typed or, given the above check, if it was typed with only one possible match
         for (let i = 0; i < mobOptions.length; i++) {
             if (value === mobOptions[i].toLowerCase()) {
                 isSpecific = true;
             }
         }
-
-
         if (value.length > 2 && (isSpecific || mobOptions.length === 1)) {
             if (guesses.includes(value)) {
                 console.log("Already guessed: " + value)
             } else {
                 console.log("Submitted guess: " + value);
-                /*
-                THIS IS WRONG
-                let temp = guesses;
-                temp.push(value);
-                setGuesses(temp);
-                React recognizes a state-change and re-renders when an object's reference (address) changes, but here it doesn't
-                So, even though we call setGuesses to trigger a state update, we technically keep the address while changing data, so yes the variable is different and state
-                update is correct, but components like GuessDisplay which rely on guesses update causing re-render will not re-render
-
-                REACT RULE: never mutate state
-                - state is immutable, if you want to change it, you don't edit the existing state, you replace it with brand new one to update what's on screen
-
-                So, we need to assign a new array to guesses with the same content and one additional value, as done below:
-                */
                 const newGuesses = [value, ...guesses];
                 setGuesses(newGuesses);
                 localStorage.guesses = JSON.stringify(newGuesses);
                 setTextContent("");
-                if (value === answer.toLowerCase()) {
+                setDisabled(true);
+                setInGuessArea(false); // bluring handles in TextGuess.jsx
+                if (value === answer.toLowerCase()) { // Keep input disabled and inGuessArea=false on corrrect guess
                     console.log("Correct!");
-                    setDisabled(true);
+                    setTimeout(() => {
+                        playConfetti();
+                    }, (ANIMATIONTIME - 0.5) * 1000);
+                } else {
+                    setTimeout(() => { // Put user back in text field after animation on wrong guess
+                        setDisabled(false);
+                        setInGuessArea(true);
+                    }, ANIMATIONTIME * 1000)
                 }
             }
         } else {
             console.log("Submission rejected")
         }
-        setInGuessArea(false);
     }
 
     const handleFocus = (e) => {
