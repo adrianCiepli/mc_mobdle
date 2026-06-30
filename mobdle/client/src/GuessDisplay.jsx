@@ -106,6 +106,7 @@ function GuessDisplay({guesses, setGuesses, answer, ANIMATIONTIME}) {
                 if (ans.hp === g.hp) {
                     hp = "eq";
                 } else if (ans.hp < g.hp) {
+                    //TODO absolute value
                     if (g.hp - ans.hp < HP_CLOSENESS_THRESHOLD) {
                         hp = "high-close";
                     } else {
@@ -175,16 +176,16 @@ function GuessDisplay({guesses, setGuesses, answer, ANIMATIONTIME}) {
                 if (index === 0) {
                     return (
                         <div className="row" key={guesses.length - index}>
-                            <div className={lastTile} style={{animationDelay: `${interval * 0}s`}}><Tile type={"r/w"} value={cguess} correctness={name} special={""}/></div>
-                            <div className={lastTile} style={{animationDelay: `${interval * 1}s`}}><Tile type={"r/w"} value={g.dimension.split(",").join(", ")} correctness={dimension} special={""}/></div>
-                            <div className={lastTile} style={{animationDelay: `${interval * 2}s`}}><Tile type={"r/w"} value={g.hostility} correctness={hostility} special={""} /></div>
-                            <div className={lastTile} style={{animationDelay: `${interval * 3}s`}}><Tile type={"h/l"} value={g.hp} correctness={hp} special={"heart"} /></div>
+                            <div className={lastTile} style={{animationDelay: `${interval * 7}s`}}><Tile type={"r/w"} value={cguess} correctness={name} special={""}/></div>
+                            <div className={lastTile} style={{animationDelay: `${interval * 0}s`}}><Tile type={"r/w"} value={g.dimension.split(",").join(", ")} correctness={dimension} special={""}/></div>
+                            <div className={lastTile} style={{animationDelay: `${interval * 1}s`}}><Tile type={"r/w"} value={g.hostility} correctness={hostility} special={""} /></div>
+                            <div className={lastTile} style={{animationDelay: `${interval * 2}s`}}><Tile type={"h/l"} value={g.hp} correctness={hp} special={"heart"} /></div>
                             {/* Passing array in makes React just mash all items into one string, so we turn into string ourselves*/}
                             {/* See Tile.jsx for additional comments */}
-                            <div className={lastTile} style={{animationDelay: `${interval * 4}s`}}><Tile type={"r/w"} value={g.movement.split(",").join(", ")} correctness={movement} special={""} /></div>
-                            <div className={lastTile} style={{animationDelay: `${interval * 5}s`}}><Tile type={"h/l"} value={g.height} correctness={height} special={"height"} /></div>
-                            <div className={lastTile} style={{animationDelay: `${interval * 6}s`}}><Tile type={"r/w"} value={g.tameable} correctness={tameable} special={"tameable"} /></div>
-                            <div className={lastTile} style={{animationDelay: `${interval * 7}s`}}><Tile type={"h/l"} value={g.releaseVersion} correctness={release} special={""} /></div>
+                            <div className={lastTile} style={{animationDelay: `${interval * 3}s`}}><Tile type={"r/w"} value={g.movement.split(",").join(", ")} correctness={movement} special={""} /></div>
+                            <div className={lastTile} style={{animationDelay: `${interval * 4}s`}}><Tile type={"h/l"} value={g.height} correctness={height} special={"height"} /></div>
+                            <div className={lastTile} style={{animationDelay: `${interval * 5}s`}}><Tile type={"r/w"} value={g.tameable} correctness={tameable} special={"tameable"} /></div>
+                            <div className={lastTile} style={{animationDelay: `${interval * 6}s`}}><Tile type={"h/l"} value={g.releaseVersion} correctness={release} special={""} /></div>
                         </div>
                     )  
                 } else {
