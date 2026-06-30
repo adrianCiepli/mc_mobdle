@@ -1,0 +1,71 @@
+.Tile {
+    width: 100%;
+    aspect-ratio: 1/1;
+    margin: 0;
+    
+}
+
+p.text {
+    font-size: 20px;
+    text-align: center;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    padding-left: 3px;
+    padding-right: 3px;
+    user-select: none;
+}
+
+.correct, .wrong, .close {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid rgb(199, 198, 198);
+    transition: transform 0.2s ease;
+}
+
+.correct:hover, .wrong:hover, .close:hover {
+    transform: translateY(-8px);
+}
+
+.correct {
+    background-color: green;
+}
+
+.wrong {
+    background-color: red;
+    margin: 0;
+}
+
+.close {
+    background-color: rgb(196, 196, 4)
+}
+
+.close.downarrow {
+    background-image: url(/yellowarrowdown.png);
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+}
+
+.close.uparrow {
+    background-image: url(/yellowarrowup.png);
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+}
+
+.wrong.downarrow {
+    background-image: url(/redarrowdown.png);
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+}
+
+.wrong.uparrow {
+    background-image: url(/redarrowup.png);
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+}

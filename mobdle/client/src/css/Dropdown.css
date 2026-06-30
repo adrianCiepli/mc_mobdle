@@ -1,0 +1,8 @@
+.Dropdown {
+    display: flex;
+    flex-direction: column;
+    gap: 0px;
+    background-color: gray;
+    max-height: 240px;
+    overflow-y: auto;
+}

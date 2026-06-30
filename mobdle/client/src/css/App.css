@@ -1,0 +1,158 @@
+@import url('https://fonts.googleapis.com/css2?family=Chewy&family=Doto:wght@100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Jersey+10&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Tiny5&display=swap');
+
+.chewy-regular {
+  font-family: "Chewy", system-ui;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.doto-font {
+  font-family: "Doto", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 200;
+  font-style: normal;
+  font-variation-settings:
+    "ROND" 0;
+}
+
+.jersey-10-regular {
+  font-family: "Jersey 10", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.tiny5-regular {
+  font-family: "Tiny5", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
+#root {
+  height: 100%;
+}
+
+/*
+When a child element has a margin-top, and there's nothing (no border, padding, or content) separating the parent's top edge from the child's top edge, 
+the child's margin "escapes" out of the parent and becomes the parent's margin instead. This pushes the entire body down by 60px, creating scroll.
+Adding padding-top: 1px to .App creates a physical barrier between the parent's top edge and the child — now the parent has padding, 
+so the child's margin has something to push against inside the parent rather than escaping outside it.
+*/
+.App {
+  padding-top: 1px;
+}
+
+body {
+  height: 100%;
+  background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('https://i.pinimg.com/originals/1c/35/5a/1c355a72ace613f0134ac9d551397272.jpg');
+  /* Alt BG: https://assets.badlion.net/blog/minecraft-backgrounds/minecraft-mods-back.webp */
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+  background-color: rgba(0,0,0,0.5);
+}
+
+.title-area {
+  display: flex;
+  flex-direction: column;
+  margin-top: 60px;
+  align-items: center;
+  gap: 0;
+}
+
+.main-title {
+  line-height: 0.8;
+  font-size: 140px;
+  font-family: "Tiny5", sans-serif;
+  text-align: center;
+  color: #AAAAAA; /* Main face: Light Gray */
+  margin-bottom: 0;
+  margin-top: 0;
+  animation: dropIn 1.8s ease-in-out forwards;
+  
+  /* The "Bevel & Pop" Logic */
+  text-shadow: 
+    /* 1. Light highlight (Top-Left) makes it pop */
+    -2px -2px 0px #DDD, 
+    
+    /* 2. Dark Gray depth (Bottom & Right) */
+    2px 2px 0px #555, 
+    4px 4px 0px #555, 
+    
+    /* 3. Final Black Silhouette (Far Bottom-Right) */
+    6px 6px 0px #000,
+    8px 8px 0px #000;
+    
+  /* Optional: Stronger contrast for the font */
+  letter-spacing: 4px;
+}
+
+.under-title {
+  opacity: 0;
+  margin-top: 0;
+  margin-bottom: 0;
+  font-size: 20px;
+  font-family: "Tiny5", sans-serif;
+  color: yellow;
+  animation: fadeIn 1.5s ease-in-out forwards 1.8s,
+              pulse 2s infinite ease-in-out 1.8s;
+  margin-left: 600px;
+  rotate: 15deg;
+}
+
+.guess-area {
+  opacity: 0;
+  margin-top: 40px;
+  margin-bottom: 10px;
+  display: flex;
+  justify-content: center;
+  animation: fadeIn 1.5s ease-in-out forwards 2.0s;
+  z-index: 2;
+}
+
+.guess-display {
+  opacity: 0;
+  display: flex;
+  justify-content: center;
+  animation: fadeIn 1.5s ease-in-out forwards 2.0s;
+  z-index: 1;
+}
+
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes dropIn {
+  0% {
+    opacity: 0;
+    transform: translateY(-50px); /* Starts 50px higher */
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);    /* Ends at its natural position */
+  }
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(0.95); }
+  100% { transform: scale(1); }
+}
+
+
+/* Confetti Stuff */
+
