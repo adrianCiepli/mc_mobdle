@@ -1,5 +1,5 @@
-import mobs from './mobs';
-import getDailyAnswer from './answergen';
+import mobs from './mobs.js';
+import getDailyAnswer from './answergen.js';
 
 export default function handler(req, res) {
     function capitalize(s) {
