@@ -19,7 +19,7 @@ export default function handler(req, res) {
         const HP_CLOSENESS_THRESHOLD = 1;
         const HEIGHT_CLOSENESS_THRESHOLD = 0.3;
 
-        // Format: // name, dimension, hostility, hp, movement, height, tameable, releaseVersion
+        // Format: // res/guess = {name, correct, dimension, hostility, hp, movement, height, tameable, release}
         const correct = g.name === ans.name ? "eq" : "neq";
 
         // Dimension matching
