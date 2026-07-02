@@ -6,9 +6,8 @@ import mobs from './data/mobs.js';
 import { useRef, useState, useEffect } from "react";
 import confetti from "canvas-confetti";
 
-
 function App() {
-  const [guesses, setGuesses] = useState([]);
+  const [guesses, setGuesses] = useState([]); // Format: // guess = {name, correct, dimension, hostility, hp, movement, height, tameable, release}
   const ANIMATIONTIME = 4.5; // seconds, time for a new guess tile-row to fully flip over
   const mobNames = Object.keys(mobs);
   const answer = useRef(mobNames[Math.floor(Math.random() * mobNames.length)]);

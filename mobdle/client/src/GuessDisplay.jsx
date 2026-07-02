@@ -54,153 +54,45 @@ function GuessDisplay({guesses, setGuesses, answer, ANIMATIONTIME}) {
             <div className="grid">
                 <p>Name</p><p>Dimension</p><p>Hostility</p><p>Hearts</p><p>Movement</p><p>Height</p><p>Tameable</p><p>Release</p>
             {guesses.map((guess, index) => {
-                const cguess = capitalizeAll(guess);
-                const ans = mobs[answer];
-                const g = mobs[cguess];
-                
-                // Format: // name, dimension, hostility, hp, movement, height, tameable, releaseVersion
-                const name = cguess === answer ? "eq" : "neq";
-
-                // Dimension matching
-                let dimension = "";
-                const ansdims = ans.dimension.split(",");
-                const gdims = g.dimension.split(",");
-                let matches = 0;
-                for (const dim of gdims) {
-                    if (ansdims.includes(dim)) {
-                        matches += 1;
-                    }
-                }
-                if (matches === ansdims.length && matches === gdims.length) {
-                    dimension = "eq";
-                } else if (matches > 0 || g.dimension === "Any") {
-                    dimension = "close";
-                } else {
-                    dimension = "neq";
-                }
-
-                const hostility = ans.hostility === g.hostility ? "eq" : "neq";
-
-                // Movement matching
-                let movement = "";
-                const ansmove = ans.movement.split(",");
-                const gmove = g.movement.split(",");
-                matches = 0;
-                for (const move of gmove) {
-                    if (ansmove.includes(move)) {
-                        matches += 1;
-                    }
-                }
-                if (matches === ansmove.length && matches === gmove.length) {
-                    movement = "eq";
-                } else if (matches > 0) {
-                    movement = "close";
-                } else {
-                    movement = "neq";
-                }
-
-                const tameable = ans.tameable === g.tameable ? "eq" : "neq";
-
-                let hp = "";
-                const HP_CLOSENESS_THRESHOLD = 1;
-                if (ans.hp === g.hp) {
-                    hp = "eq";
-                } else if (ans.hp < g.hp) {
-                    //TODO absolute value
-                    if (g.hp - ans.hp < HP_CLOSENESS_THRESHOLD) {
-                        hp = "high-close";
-                    } else {
-                        hp = "high-far";
-                    }
-                } else {
-                    if (ans.hp - g.hp < HP_CLOSENESS_THRESHOLD) {
-                        hp = "low-close";
-                    } else {
-                        hp = "low-far";
-                    }
-                }
-
-                let height = "";
-                const HEIGHT_CLOSENESS_THRESHOLD = 0.3;
-                if (ans.height === g.height) {
-                    height = "eq";
-                } else if (ans.height < g.height) {
-                    if (g.height - ans.height < HEIGHT_CLOSENESS_THRESHOLD) {
-                        height = "high-close";
-                    } else {
-                        height = "high-far";
-                    }
-                } else {
-                    if (ans.height - g.height < HEIGHT_CLOSENESS_THRESHOLD) {
-                        height = "low-close";
-                    } else {
-                        height = "low-far";
-                    }
-                }
-
-                let release = "";
-                let ansRelease = ans.releaseVersion.split(".");
-                let gRelease = g.releaseVersion.split(".");
-                // parseInt takes second arg as base of integer, good for sanity to include base 10
-                let i = 0;
-                while (i < Math.min(ansRelease.length, gRelease.length)) {
-                    if (parseInt(gRelease[i], 10) < parseInt(ansRelease[i], 10)) {
-                        release = "low-far";
-                        break;
-                    } else if (parseInt(gRelease[i], 10) > parseInt(ansRelease[i], 10)) {
-                        release = "high-far";
-                        break;
-                    }
-                    i++;
-                }
-                if (i === Math.min(ansRelease.length, gRelease.length)) {
-                    if (gRelease.length < ansRelease.length) {
-                        release = "low-far";
-                    } else if (gRelease.length > ansRelease.length) {
-                        release = "high-far";
-                    } else {
-                        release = "eq";
-                    }
-                }
-
+                const g = mobs[guess.name];
                 let lastTile = "";
                 if (!initialMount.current && index === 0) {
                     lastTile = "tile-flip";
                 }
 
                 // r/w = right/wrong, h/l = higher/lower
-                // Format: // name, dimension, hostility, hp, movement, height, tameable, releaseVersion
+                // Format: // guess = {name, correct, dimension, hostility, hp, movement, height, tameable, release}
                 // Since the index of the first is always 0, don't use as key since doing so means React sees this first element on key=(index=0) as the same element on re-render
                 // where the class has not changed, it has .tile-flip on previous render and now the same, so the animation does not trigger since class is constant on render
                 const interval = (ANIMATIONTIME - 1) / 7;
                 if (index === 0) {
                     return (
                         <div className="row" key={guesses.length - index}>
-                            <div className={lastTile} style={{animationDelay: `${interval * 7}s`}}><Tile type={"r/w"} value={cguess} correctness={name} special={""}/></div>
-                            <div className={lastTile} style={{animationDelay: `${interval * 0}s`}}><Tile type={"r/w"} value={g.dimension.split(",").join(", ")} correctness={dimension} special={""}/></div>
-                            <div className={lastTile} style={{animationDelay: `${interval * 1}s`}}><Tile type={"r/w"} value={g.hostility} correctness={hostility} special={""} /></div>
-                            <div className={lastTile} style={{animationDelay: `${interval * 2}s`}}><Tile type={"h/l"} value={g.hp} correctness={hp} special={"heart"} /></div>
+                            <div className={lastTile} style={{animationDelay: `${interval * 7}s`}}><Tile type={"r/w"} value={guess.name} correctness={guess.correct} special={""}/></div>
+                            <div className={lastTile} style={{animationDelay: `${interval * 0}s`}}><Tile type={"r/w"} value={g.dimension.split(",").join(", ")} correctness={guess.dimension} special={""}/></div>
+                            <div className={lastTile} style={{animationDelay: `${interval * 1}s`}}><Tile type={"r/w"} value={g.hostility} correctness={guess.hostility} special={""} /></div>
+                            <div className={lastTile} style={{animationDelay: `${interval * 2}s`}}><Tile type={"h/l"} value={g.hp} correctness={guess.hp} special={"heart"} /></div>
                             {/* Passing array in makes React just mash all items into one string, so we turn into string ourselves*/}
                             {/* See Tile.jsx for additional comments */}
-                            <div className={lastTile} style={{animationDelay: `${interval * 3}s`}}><Tile type={"r/w"} value={g.movement.split(",").join(", ")} correctness={movement} special={""} /></div>
-                            <div className={lastTile} style={{animationDelay: `${interval * 4}s`}}><Tile type={"h/l"} value={g.height} correctness={height} special={"height"} /></div>
-                            <div className={lastTile} style={{animationDelay: `${interval * 5}s`}}><Tile type={"r/w"} value={g.tameable} correctness={tameable} special={"tameable"} /></div>
-                            <div className={lastTile} style={{animationDelay: `${interval * 6}s`}}><Tile type={"h/l"} value={g.releaseVersion} correctness={release} special={""} /></div>
+                            <div className={lastTile} style={{animationDelay: `${interval * 3}s`}}><Tile type={"r/w"} value={g.movement.split(",").join(", ")} correctness={guess.movement} special={""} /></div>
+                            <div className={lastTile} style={{animationDelay: `${interval * 4}s`}}><Tile type={"h/l"} value={g.height} correctness={guess.height} special={"height"} /></div>
+                            <div className={lastTile} style={{animationDelay: `${interval * 5}s`}}><Tile type={"r/w"} value={g.tameable} correctness={guess.tameable} special={"tameable"} /></div>
+                            <div className={lastTile} style={{animationDelay: `${interval * 6}s`}}><Tile type={"h/l"} value={g.releaseVersion} correctness={guess.release} special={""} /></div>
                         </div>
                     )  
                 } else {
                     return (
                         <div className="row" key={guesses.length - index}>
-                            <div className={lastTile}><Tile type={"r/w"} value={cguess} correctness={name} special={""}/></div>
-                            <div className={lastTile}><Tile type={"r/w"} value={g.dimension.split(",").join(", ")} correctness={dimension} special={""}/></div>
-                            <div className={lastTile}><Tile type={"r/w"} value={g.hostility} correctness={hostility} special={""} /></div>
-                            <div className={lastTile}><Tile type={"h/l"} value={g.hp} correctness={hp} special={"heart"} /></div>
+                            <div className={lastTile}><Tile type={"r/w"} value={guess.name} correctness={guess.correct} special={""}/></div>
+                            <div className={lastTile}><Tile type={"r/w"} value={g.dimension.split(",").join(", ")} correctness={guess.dimension} special={""}/></div>
+                            <div className={lastTile}><Tile type={"r/w"} value={g.hostility} correctness={guess.hostility} special={""} /></div>
+                            <div className={lastTile}><Tile type={"h/l"} value={g.hp} correctness={guess.hp} special={"heart"} /></div>
                             {/* Passing array in makes React just mash all items into one string, so we turn into string ourselves*/}
                             {/* See Tile.jsx for additional comments */}
-                            <div className={lastTile}><Tile type={"r/w"} value={g.movement.split(",").join(", ")} correctness={movement} special={""} /></div>
-                            <div className={lastTile}><Tile type={"h/l"} value={g.height} correctness={height} special={"height"} /></div>
-                            <div className={lastTile}><Tile type={"r/w"} value={g.tameable} correctness={tameable} special={"tameable"} /></div>
-                            <div className={lastTile}><Tile type={"h/l"} value={g.releaseVersion} correctness={release} special={""} /></div>
+                            <div className={lastTile}><Tile type={"r/w"} value={g.movement.split(",").join(", ")} correctness={guess.movement} special={""} /></div>
+                            <div className={lastTile}><Tile type={"h/l"} value={g.height} correctness={guess.height} special={"height"} /></div>
+                            <div className={lastTile}><Tile type={"r/w"} value={g.tameable} correctness={guess.tameable} special={"tameable"} /></div>
+                            <div className={lastTile}><Tile type={"h/l"} value={g.releaseVersion} correctness={guess.release} special={""} /></div>
                         </div>
                     )
                 }
