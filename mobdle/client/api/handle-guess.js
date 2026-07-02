@@ -142,7 +142,7 @@ export default function handler(req, res) {
         const feedbackPayload = {name: g.name, correct: correct, dimension: dimension, hostility: hostility, movement: movement, tameable: tameable, hp: hp, height: height, release: release};
         return res.status(200).json(feedbackPayload);
     } catch (err) {
-        return res.status(500).json({ error: "Internal Server Error encountered while processing request data" });
+        return res.status(500).json({ error: err.message, stack: err.stack });
         // The res.json() does the sending of the response over HTTP by calling raw Node stuff like .stringify(), .write(), .end() (see React Notes on my docs)
         // We return to halt this Javascript function as you normally would, for cleanliness, it's the same effect as this (sending first, then terminating function):
         // res.status(500).json({error: "Internal Server Error"}); 
