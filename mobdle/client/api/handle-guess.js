@@ -2,24 +2,42 @@ import mobs from './mobs';
 import getDailyAnswer from './answergen';
 
 export default function handler(req, res) {
+    function capitalize(s) {
+        return s.charAt(0).toUpperCase() + s.slice(1);
+    }
+
+    function capitalizeAll(s) {
+        let arr = s.split(" ");
+        arr = arr.map((word) => capitalize(word));
+        return arr.join(" ");
+    }
+
     if (req.method !== 'POST') {
         return res.status(405).json({ error: 'Method Not Allowed' });
     }
 
     try {
-        // Vercel pre-parses JSON bodies directly onto req.body for you
+        // Vercel pre-parses JSON bodies directly onto req.body
         const { userGuess } = req.body;
         if (!userGuess) {
             return res.status(400).json({ error: 'Missing userGuess parameter' });
         }
+        // The user's guess' mob's name was converted to lower for some comparison-ease in the logic in GuessArea.jsx, but we need to match mobs.js with capital start
+        // We send to GuessDisplay.jsx which also needs to use the name we but into the res to index mobs.js, so send it also as a capital
+        const formattedKey = capitalizeAll(userGuess);
+        const g = mobs[formattedKey];
         const ans = getDailyAnswer();
-        const g = mobs[userGuess];
+
+        // Sanity check just in case some edge case gets hit
+        if (!g) {
+            return res.status(404).json({ error: `Mob '${formattedKey}' not found in database.` });
+        }
 
         // CONSTANTS THRESHOLDS
         const HP_CLOSENESS_THRESHOLD = 1;
         const HEIGHT_CLOSENESS_THRESHOLD = 0.3;
 
-        // Format: // name, dimension, hostility, hp, movement, height, tameable, releaseVersion
+        // Format: // res/guess = {name, correct, dimension, hostility, hp, movement, height, tameable, release}
         const correct = g.name === ans.name ? "eq" : "neq";
 
         // Dimension matching
@@ -121,7 +139,7 @@ export default function handler(req, res) {
             }
         }
 
-        feedbackPayload = {name: g.name, correct: correct, dimension: dimension, hostility: hostility, movement: movement, tameable: tameable, hp: hp, height: height, release: release};
+        const feedbackPayload = {name: g.name, correct: correct, dimension: dimension, hostility: hostility, movement: movement, tameable: tameable, hp: hp, height: height, release: release};
         return res.status(200).json(feedbackPayload);
     } catch (err) {
         return res.status(500).json({ error: "Internal Server Error encountered while processing request data" });
