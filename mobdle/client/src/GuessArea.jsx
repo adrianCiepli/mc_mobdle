@@ -20,11 +20,18 @@ function GuessArea({ guesses, setGuesses, answer, ANIMATIONTIME }) {
 
     // To prevent this from running unnecessarily on EVERY render, this should only run on initial render where a refresh would destroy this needed state
     useEffect(() => {
+        const today = new Date().toLocaleDateString();
         if (localStorage.guesses) {
             // localstorage always stores strings in the attributes, so store an object, we need the JSON methods
             // JSON.parse(string) turns a formatted JSON string into an appropriate object
             // JSON.stringify(object) turns an object, including an array, into a JSON formatted string that localStorage can store
-            setGuesses(JSON.parse(localStorage.guesses));
+            if (localStorage.date === today) {
+                setGuesses(JSON.parse(localStorage.guesses));
+            } else {
+                localStorage.clear();
+                localStorage.date = today;
+                setGuesses([])
+            }
         }
     }, [])
 
@@ -66,27 +73,41 @@ function GuessArea({ guesses, setGuesses, answer, ANIMATIONTIME }) {
             }
         }
         if (value.length > 2 && (isSpecific || mobOptions.length === 1)) {
-            if (guesses.includes(value)) {
-                console.log("Already guessed: " + value)
+            if (guesses.some((guess) => {guess.name === value})) {
+                console.log("Already guessed: " + value);
             } else {
-                console.log("Submitted guess: " + value);
-                const newGuesses = [value, ...guesses];
-                setGuesses(newGuesses);
-                localStorage.guesses = JSON.stringify(newGuesses);
-                setTextContent("");
-                setDisabled(true);
-                setInGuessArea(false); // bluring handles in TextGuess.jsx
-                if (value === answer.toLowerCase()) { // Keep input disabled and inGuessArea=false on corrrect guess
-                    console.log("Correct!");
-                    setTimeout(() => {
-                        playConfetti();
-                    }, (ANIMATIONTIME - 0.5) * 1000);
-                } else {
-                    setTimeout(() => { // Put user back in text field after animation on wrong guess
-                        setDisabled(false);
-                        setInGuessArea(true);
-                    }, ANIMATIONTIME * 1000)
-                }
+                console.log("Submitting guess: " + value);
+
+                // It's ok to update state here since its inside event listener, which won't auto-run on render
+                // It's dangerous inside of a component's return or loosely somewhere where it updates state but also runs on re-render, causing infinite loop
+                fetch("api/handle-guess", {
+                    method: "POST",
+                    headers: {"Content-type": "application/json"},
+                    body: JSON.stringify({ userGuess: value })}
+                ).then((res) => {
+                    if (!res.ok) {
+                        throw new Error("Fetch completed but server responded with some error");
+                    }
+                    return res.json(); // Format: // res/guess = {name, correct, dimension, hostility, hp, movement, height, tameable, release}
+                }).then((resBody) => {
+                    const newGuesses = [resBody, ...guesses];
+                    setGuesses(newGuesses);
+                    localStorage.guesses = JSON.stringify(newGuesses);
+                    setTextContent("");
+                    setDisabled(true);
+                    setInGuessArea(false); // bluring handled in TextGuess.jsx
+                    if (resBody.correct) { // Keep input disabled and inGuessArea=false on corrrect guess
+                        console.log("Correct!");
+                        setTimeout(() => {
+                            playConfetti();
+                        }, (ANIMATIONTIME - 0.5) * 1000);
+                    } else {
+                        setTimeout(() => { // Put user back in text field after animation on wrong guess
+                            setDisabled(false);
+                            setInGuessArea(true);
+                        }, ANIMATIONTIME * 1000)
+                    }
+                }).catch(err => console.log("Fetch could not complete, error occured:", err)); // Catches any error above, like try/catch
             }
         } else {
             console.log("Submission rejected")
