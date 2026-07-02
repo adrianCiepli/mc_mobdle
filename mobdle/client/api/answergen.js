@@ -17,7 +17,7 @@ const getDailyAnswer = () => {
 
   const dailyMobKey = mobKeys[dailyIndex];
 
-  const ans = { name: targetKey, ...mobs[dailyMobKey] };
+  const ans = { name: dailyMobKey, ...mobs[dailyMobKey] };
 
   return ans;
 }
