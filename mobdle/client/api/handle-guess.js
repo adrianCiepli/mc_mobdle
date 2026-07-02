@@ -38,7 +38,7 @@ export default function handler(req, res) {
         const HEIGHT_CLOSENESS_THRESHOLD = 0.3;
 
         // Format: // res/guess = {name, correct, dimension, hostility, hp, movement, height, tameable, release}
-        const correct = g.name === ans.name ? "eq" : "neq";
+        const correct = formattedKey === ans.name ? "eq" : "neq";
 
         // Dimension matching
         let dimension = "";
@@ -139,7 +139,7 @@ export default function handler(req, res) {
             }
         }
 
-        const feedbackPayload = {name: g.name, correct: correct, dimension: dimension, hostility: hostility, movement: movement, tameable: tameable, hp: hp, height: height, release: release};
+        const feedbackPayload = {name: formattedKey, correct: correct, dimension: dimension, hostility: hostility, movement: movement, tameable: tameable, hp: hp, height: height, release: release};
         return res.status(200).json(feedbackPayload);
     } catch (err) {
         return res.status(500).json({ error: err.message, stack: err.stack });
