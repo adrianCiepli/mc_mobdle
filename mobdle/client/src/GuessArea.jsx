@@ -29,10 +29,10 @@ function GuessArea({ guesses, setGuesses, ANIMATIONTIME }) {
                 setGuesses(JSON.parse(localStorage.guesses));
             } else {
                 localStorage.clear();
-                localStorage.date = today;
                 setGuesses([])
             }
         }
+        localStorage.date = today;
     }, [])
 
     const playConfetti = () => {
