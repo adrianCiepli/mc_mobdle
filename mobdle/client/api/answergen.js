@@ -1,5 +1,7 @@
 import mobs from "./mobs.js";
 
+// Future logic may need to account for user local time, probably via having a useEffect() on mount in App.jsx that sends the user time zone to the server
+
 const getDailyAnswer = () => {
   const mobKeys = Object.keys(mobs);
 
