@@ -10,6 +10,17 @@ function GuessArea({ guesses, setGuesses, ANIMATIONTIME }) {
     const [textContent, setTextContent] = useState("");
     const [disabled, setDisabled] = useState(false);
 
+    // Temporarily, while we only have players in Toronto
+    function getTorontoDateString() {
+        const formatter = new Intl.DateTimeFormat("en-CA", {
+            timeZone: "America/Toronto",
+            year: "numeric",
+            month: "2-digit",
+            day: "2-digit",
+        });
+        return formatter.format(new Date()); // e.g. "2026-07-02"
+    }
+
     // Object.keys(dictVar) returns list of all keys of the dictionary
     // List.filter(predicateFunc) will run the predicate for every item and can use item as param, and returns new list of items for which predicate was true on running
     let mobOptions = Object.keys(mobs).filter((mobName) => { return mobName.toLowerCase().includes(textContent.toLowerCase()) });
@@ -20,13 +31,18 @@ function GuessArea({ guesses, setGuesses, ANIMATIONTIME }) {
 
     // To prevent this from running unnecessarily on EVERY render, this should only run on initial render where a refresh would destroy this needed state
     useEffect(() => {
-        const today = new Date().toLocaleDateString();
+        // const today = new Date().toLocaleDateString();
+        const today = getTorontoDateString();
         if (localStorage.guesses) {
             // localstorage always stores strings in the attributes, so store an object, we need the JSON methods
             // JSON.parse(string) turns a formatted JSON string into an appropriate object
             // JSON.stringify(object) turns an object, including an array, into a JSON formatted string that localStorage can store
             if (localStorage.date === today) {
                 setGuesses(JSON.parse(localStorage.guesses));
+                const alreadySolved = JSON.parse(localStorage.guesses).some(g => g.correct === "eq");
+                if (alreadySolved) {
+                    setDisabled(true);
+                }
             } else {
                 localStorage.clear();
                 setGuesses([])
