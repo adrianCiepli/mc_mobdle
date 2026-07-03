@@ -10,7 +10,7 @@ function App() {
   const [guesses, setGuesses] = useState([]); // Format: // guess = {name, correct, dimension, hostility, hp, movement, height, tameable, release}
   const ANIMATIONTIME = 4.5; // seconds, time for a new guess tile-row to fully flip over
   const mobNames = Object.keys(mobs);
-  const answer = useRef(mobNames[Math.floor(Math.random() * mobNames.length)]);
+  // const answer = useRef(mobNames[Math.floor(Math.random() * mobNames.length)]);
 
   // Non-functional code that just uses each .gif so that there is no initial-fetch lag the first time they are needed in DropDown menu
   useEffect(() => {
@@ -20,9 +20,9 @@ function App() {
     });
   }, []);
 
-  useEffect(() => {
-    console.log("Answer: ", answer.current);
-  }, [answer]);
+  // useEffect(() => {
+  //   console.log("Answer: ", answer.current);
+  // }, [answer]);
 
   return (
     <div className="App">
@@ -32,10 +32,10 @@ function App() {
         <img src='/title_text.png' className='main-title' style={{ width: '30%', height: '35%' }} />
       </div>
       <div className='guess-area'>
-        <GuessArea guesses={guesses} setGuesses={setGuesses} answer={answer.current} ANIMATIONTIME={ANIMATIONTIME} />
+        <GuessArea guesses={guesses} setGuesses={setGuesses} ANIMATIONTIME={ANIMATIONTIME} />
       </div>
       <div className='guess-display'>
-        <GuessDisplay guesses={guesses} setGuesses={setGuesses} answer={answer.current} ANIMATIONTIME={ANIMATIONTIME} />
+        <GuessDisplay guesses={guesses} setGuesses={setGuesses} ANIMATIONTIME={ANIMATIONTIME} />
       </div>
     </div>
   );
