@@ -25,7 +25,7 @@ const getDailyAnswer = () => {
   const dateSeed = (year * 10000) + (month * 100) + day;
 
   // Slightly complicated formula to make it feel more random if you know about mobs.js, can change 1013 to a different prime at will
-  const dailyIndex = ((dateSeed * 1013) + 47) % totalMobs;
+  const dailyIndex = ((dateSeed * 1013) + 47) % mobKeys.length;
 
   const dailyMobKey = mobKeys[dailyIndex];
 
