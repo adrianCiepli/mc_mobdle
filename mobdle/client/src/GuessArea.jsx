@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import mobs from "./data/mobs.js";
 import confetti from "canvas-confetti";
 
-function GuessArea({ guesses, setGuesses, answer, ANIMATIONTIME }) {
+function GuessArea({ guesses, setGuesses, ANIMATIONTIME }) {
     {/* Have a text field and a dropdown option that changes dynamically with typing */ }
     const [inGuessArea, setInGuessArea] = useState(false);
     const [textContent, setTextContent] = useState("");
@@ -96,7 +96,7 @@ function GuessArea({ guesses, setGuesses, answer, ANIMATIONTIME }) {
                     setTextContent("");
                     setDisabled(true);
                     setInGuessArea(false); // bluring handled in TextGuess.jsx
-                    if (resBody.correct) { // Keep input disabled and inGuessArea=false on corrrect guess
+                    if (resBody.correct == "eq") { // Keep input disabled and inGuessArea=false on corrrect guess
                         console.log("Correct!");
                         setTimeout(() => {
                             playConfetti();

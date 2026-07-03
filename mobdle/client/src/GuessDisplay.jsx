@@ -26,7 +26,7 @@ const { initialMount } = obj; // undefined, there's no "initialMount" key, since
 */
 
 
-function GuessDisplay({guesses, setGuesses, answer, ANIMATIONTIME}) {
+function GuessDisplay({guesses, setGuesses, ANIMATIONTIME}) {
     const mountCount = useRef(0);
     const initialMount = useRef(true);
 
