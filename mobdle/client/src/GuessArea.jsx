@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import mobs from "./data/mobs.js";
 import confetti from "canvas-confetti";
 
-function GuessArea({ guesses, setGuesses, ANIMATIONTIME }) {
+function GuessArea({ guesses, setGuesses, setGotCorrect, ANIMATIONTIME }) {
     {/* Have a text field and a dropdown option that changes dynamically with typing */ }
     const [inGuessArea, setInGuessArea] = useState(false);
     const [textContent, setTextContent] = useState("");
@@ -42,6 +42,7 @@ function GuessArea({ guesses, setGuesses, ANIMATIONTIME }) {
                 const alreadySolved = JSON.parse(localStorage.guesses).some(g => g.correct === "eq");
                 if (alreadySolved) {
                     setDisabled(true);
+                    setGotCorrect(true);
                 }
             } else {
                 localStorage.clear();
@@ -89,7 +90,7 @@ function GuessArea({ guesses, setGuesses, ANIMATIONTIME }) {
             }
         }
         if (value.length > 2 && (isSpecific || mobOptions.length === 1)) {
-            if (guesses.some((guess) => {guess.name === value})) {
+            if (guesses.some((guess) => guess.name.toLowerCase() === value.toLowerCase())) {
                 console.log("Already guessed: " + value);
             } else {
                 console.log("Submitting guess: " + value);
@@ -116,6 +117,7 @@ function GuessArea({ guesses, setGuesses, ANIMATIONTIME }) {
                         console.log("Correct!");
                         setTimeout(() => {
                             playConfetti();
+                            setGotCorrect(true);
                         }, (ANIMATIONTIME - 0.5) * 1000);
                     } else {
                         setTimeout(() => { // Put user back in text field after animation on wrong guess

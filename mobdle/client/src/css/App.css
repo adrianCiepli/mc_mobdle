@@ -107,6 +107,21 @@ body {
   rotate: 15deg;
 }
 
+.shareable-copy-text {
+  font-family: "Tiny5", sans-serif;
+  color: yellow;
+  font-size: 30px;
+  text-align: center;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  transition: font-size 0.2s ease;
+}
+
+.shareable-copy-text:hover {
+  color: rgb(70, 130, 241);
+  font-size: 35px;
+}
+
 .guess-area {
   opacity: 0;
   margin-top: 40px;

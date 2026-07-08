@@ -10,19 +10,53 @@ function App() {
   const [guesses, setGuesses] = useState([]); // Format: // guess = {name, correct, dimension, hostility, hp, movement, height, tameable, release}
   const ANIMATIONTIME = 4.5; // seconds, time for a new guess tile-row to fully flip over
   const mobNames = Object.keys(mobs);
+  const [gotCorrect, setGotCorrect] = useState(false);
+  const [guessShareable, setGuessShareable] = useState("");
+  const [copied, setCopied] = useState(false);
   // const answer = useRef(mobNames[Math.floor(Math.random() * mobNames.length)]);
 
   // Non-functional code that just uses each .gif so that there is no initial-fetch lag the first time they are needed in DropDown menu
   useEffect(() => {
     Object.keys(mobs).forEach(name => {
-        const img = new Image();
-        img.src = `/${name}.gif`;
+      const img = new Image();
+      img.src = `/${name}.gif`;
     });
   }, []);
 
-  // useEffect(() => {
-  //   console.log("Answer: ", answer.current);
-  // }, [answer]);
+  useEffect(() => {
+    const formatter = new Intl.DateTimeFormat("en-CA", {
+      timeZone: "America/Toronto",
+      year: "numeric",
+      month: "2-digit",
+      day: "2-digit",
+    });
+    const todayStr = formatter.format(new Date()); // YYYY-MM-DD
+
+    const cols = ["correct", "dimension", "hostility", "hp", "movement", "height", "tameable", "release"];
+    const temp = guesses.map(guess => {
+      return cols.map(col => {
+        const correctness = guess[col];
+        if (correctness === "eq") {
+          return "🟩";
+        } else if (correctness === "neq" || correctness === "high-far" || correctness === "low-far") {
+          return "🟥";
+        } else {
+          return "🟨";
+        }
+      }).join(""); // Each guess gets mapped to a list where each col in cols takes guess[col] and returns a coloured square in the new list, join into string for each guess
+    }).join("\n"); // The entire array is (at first a list of lists) a list of strings, join them together into one string with lines separated
+    const text = `Mobdle (${todayStr}) - ${guesses.length} attempts\n\n${temp}`;
+    setGuessShareable(text);
+  }, [guesses])
+
+  const handleCopy = () => {
+    navigator.clipboard.writeText(guessShareable).then(() => { // It's an async function that returns a Promise, put code that runs after copying is done here:
+      setCopied(true);
+      setTimeout(() => {
+        setCopied(false);
+      }, 5000);
+    });
+  };
 
   return (
     <div className="App">
@@ -31,8 +65,11 @@ function App() {
         {/* <h1 className="main-title">Mobdle</h1> */}
         <img src='/title_text.png' className='main-title' style={{ width: '30%', height: '35%' }} />
       </div>
+      <div className='shareable-guesses'>
+        {gotCorrect && <div className='shareable-copy-text' onClick={handleCopy}>{copied ? "Copied!" : "Click Here to Copy Results and Share!"}</div>}
+      </div>
       <div className='guess-area'>
-        <GuessArea guesses={guesses} setGuesses={setGuesses} ANIMATIONTIME={ANIMATIONTIME} />
+        <GuessArea guesses={guesses} setGuesses={setGuesses} setGotCorrect={setGotCorrect} ANIMATIONTIME={ANIMATIONTIME} />
       </div>
       <div className='guess-display'>
         <GuessDisplay guesses={guesses} setGuesses={setGuesses} ANIMATIONTIME={ANIMATIONTIME} />
