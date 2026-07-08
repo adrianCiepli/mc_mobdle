@@ -107,16 +107,23 @@ body {
   rotate: 15deg;
 }
 
+.shareable-guesses {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
 .shareable-copy-text {
   font-family: "Tiny5", sans-serif;
   color: rgb(35, 35, 248);
-  font-size: 12px;
+  font-size: 15px;
   text-align: center;
   margin-top: 20px;
   cursor: pointer;
   user-select: none;
   display: inline-block;
   transition: transform 0.2s ease;
+  animation: fadeIn 1.5s ease-in-out forwards 2.0s;
 }
 
 .shareable-copy-text:hover {
