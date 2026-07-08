@@ -116,7 +116,7 @@ body {
 .shareable-copy-text {
   opacity: 0;
   font-family: "Tiny5", sans-serif;
-  color: white;
+  color: rgb(196, 51, 51);
   font-size: 15px;
   text-align: center;
   margin-top: 20px;
@@ -128,7 +128,7 @@ body {
 }
 
 .shareable-copy-text:hover {
-  color: rgb(70, 130, 241);
+  color: rgb(15, 207, 15);
   transform: scale(1.10);
   /*font-size: 35px;     changing font size will change the element's container size and move all other elements around, 
   transform: scale makes it bigger without affecting container*/
