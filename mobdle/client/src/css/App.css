@@ -114,8 +114,9 @@ body {
 }
 
 .shareable-copy-text {
+  opacity: 0;
   font-family: "Tiny5", sans-serif;
-  color: rgb(35, 35, 248);
+  color: white;
   font-size: 15px;
   text-align: center;
   margin-top: 20px;
