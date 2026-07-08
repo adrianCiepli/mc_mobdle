@@ -43,8 +43,8 @@ function App() {
         } else {
           return "🟨";
         }
-      }).join(""); // Each guess gets mapped to a list where each col in cols takes guess[col] and returns a coloured square in the new list, join into string for each guess
-    }).join("\n"); // The entire array is (at first a list of lists) a list of strings, join them together into one string with lines separated
+      }).join(" "); // Each guess gets mapped to a list where each col in cols takes guess[col] and returns a coloured square in the new list, join into string for each guess
+    }).join("\n\n"); // The entire array is (at first a list of lists) a list of strings, join them together into one string with lines separated
     const text = `Mobdle (${todayStr}) - ${guesses.length} attempts\n\n${temp}`;
     setGuessShareable(text);
   }, [guesses])
