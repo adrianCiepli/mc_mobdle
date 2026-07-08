@@ -109,13 +109,13 @@ body {
 
 .shareable-copy-text {
   font-family: "Tiny5", sans-serif;
-  color: yellow;
-  font-size: 20px;
+  color: rgb(35, 35, 248);
+  font-size: 12px;
   text-align: center;
-  margin-top: 10px;
-  margin-bottom: 10px;
+  margin-top: 20px;
   cursor: pointer;
   user-select: none;
+  display: inline-block;
   transition: transform 0.2s ease;
 }
 
