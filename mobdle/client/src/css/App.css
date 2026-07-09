@@ -111,17 +111,20 @@ body {
   opacity: 0;
   display: flex;
   width: fit-content;
-  margin: 0 auto; /*Shorthand for <top-down> <right-left> auto will evenly distribute since margin-left and right are auto, so it centers on the width*/
+  /*margin: 0 auto; Shorthand for <top-down> <right-left> auto will evenly distribute since margin-left and right are auto, so it centers on the width*/
+  margin-top: 15px;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   cursor: pointer;
   transition: transform 0.2s ease;
   animation: fadeIn 1.5s ease-in-out forwards 2.0s;
+  color: white;
 }
 
 .shareable-guesses:hover {
   transform: scale(1.15);
+  color: rgb(19, 240, 19);
 }
 
 .shareable-copy-text {
@@ -129,17 +132,11 @@ body {
   color: white;
   font-size: 15px;
   text-align: center;
-  margin-top: 20px;
+  margin-top: 10px;
   cursor: pointer;
   user-select: none;
   display: inline-block;
   /* animation: fadeIn 1.5s ease-in-out forwards 2.0s; */
-}
-
- .shareable-copy-text:hover {
-  color: rgb(19, 240, 19);
-  /*font-size: 35px;     changing font size will change the element's container size and move all other elements around, 
-  transform: scale makes it bigger without affecting container*/
 }
 
 .share-button {
@@ -151,7 +148,7 @@ body {
 
 .guess-area {
   opacity: 0;
-  margin-top: 40px;
+  margin-top: 25px;
   margin-bottom: 10px;
   display: flex;
   justify-content: center;
