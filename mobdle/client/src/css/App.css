@@ -141,7 +141,7 @@ body {
 /*} */
 
 .share-button {
-  display: block;
+  display: inline-block;
   width: 100%;
   height: auto;
   max-width: 25px;
