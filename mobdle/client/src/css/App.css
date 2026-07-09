@@ -108,7 +108,9 @@ body {
 }
 
 .shareable-guesses {
+  opacity: 0;
   display: flex;
+  width: fit-content;
   flex-direction: column;
   justify-content: center;
   align-items: center;
@@ -121,7 +123,6 @@ body {
 }
 
 .shareable-copy-text {
-  opacity: 0;
   font-family: "Tiny5", sans-serif;
   color: rgb(44, 212, 44);
   font-size: 15px;
