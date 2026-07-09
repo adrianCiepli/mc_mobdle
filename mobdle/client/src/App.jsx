@@ -66,8 +66,8 @@ function App() {
         {/* <h1 className="main-title">Mobdle</h1> */}
         <img src='/title_text.png' className='main-title' style={{ width: '30%', height: '35%' }} />
       </div>
-      {gotCorrect && <div className='shareable-guesses'><img src='/share_white.png' className='share-button' alt='Share Button' />
-        <div className='shareable-copy-text' onClick={handleCopy}>{copied ? "Copied!" : "Share results"}</div></div>}
+      {gotCorrect && <div className='shareable-guesses' onClick={handleCopy}><img src='/share_white.png' className='share-button' alt='Share Button' />
+        <div className='shareable-copy-text'>{copied ? "Copied!" : "Share results"}</div></div>}
       <div className='guess-area'>
         <GuessArea guesses={guesses} setGuesses={setGuesses} setGotCorrect={setGotCorrect} ANIMATIONTIME={ANIMATIONTIME} />
       </div>
