@@ -20,6 +20,8 @@ function App() {
       const img = new Image();
       img.src = `/${name}.gif`;
     });
+    const img = new Image();
+    img.src = '/share_white.png';
   }, []);
 
   useEffect(() => {
