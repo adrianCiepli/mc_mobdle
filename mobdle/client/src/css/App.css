@@ -109,8 +109,16 @@ body {
 
 .shareable-guesses {
   display: flex;
+  flex-direction: column;
   justify-content: center;
+  align-items: center;
   width: 100%;
+  transition: transform 0.2s ease;
+  animation: fadeIn 1.5s ease-in-out forwards 2.0s;
+}
+
+.shareable-guesses:hover {
+  transform: scale(1.15);
 }
 
 .shareable-copy-text {
@@ -123,16 +131,14 @@ body {
   cursor: pointer;
   user-select: none;
   display: inline-block;
-  transition: transform 0.2s ease;
-  animation: fadeIn 1.5s ease-in-out forwards 2.0s;
+  /* animation: fadeIn 1.5s ease-in-out forwards 2.0s; */
 }
 
-.shareable-copy-text:hover {
+/* .shareable-copy-text:hover {
   color: rgb(19, 240, 19);
-  transform: scale(1.10);
   /*font-size: 35px;     changing font size will change the element's container size and move all other elements around, 
   transform: scale makes it bigger without affecting container*/
-}
+/*} */
 
 .share-button {
   display: block;
