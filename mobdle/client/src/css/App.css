@@ -98,12 +98,12 @@ body {
   opacity: 0;
   margin-top: 0;
   margin-bottom: 0;
-  font-size: 20px;
+  font-size: 1.1vw; /* 1.1% of the viewport width */
   font-family: "Tiny5", sans-serif;
   color: yellow;
   animation: fadeIn 1.5s ease-in-out forwards 1.8s,
               pulse 2s infinite ease-in-out 1.8s;
-  margin-left: 600px;
+  margin-left: 30%;
   rotate: 15deg;
 }
 
