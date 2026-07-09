@@ -21,7 +21,7 @@
     outline: none;
 }
 
-img {
+.Option img { /* If doing general tag selectors, specify component, because this will affect ALL <img> tags in EVERY COMPONENT, EVEN APP.JSX*/
     height: 80px;
     width: auto;
     margin-right: 30px;
