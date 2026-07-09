@@ -134,6 +134,11 @@ body {
   transform: scale makes it bigger without affecting container*/
 }
 
+.share-button {
+  height: 10%;
+  width: 10%;
+}
+
 .guess-area {
   opacity: 0;
   margin-top: 40px;

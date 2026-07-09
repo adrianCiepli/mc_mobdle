@@ -1,6 +1,5 @@
 import './css/App.css';
 import GuessArea from "./GuessArea";
-import bgVideo from "./assets/minecraft_bg1.mp4";
 import GuessDisplay from './GuessDisplay';
 import mobs from './data/mobs.js';
 import { useRef, useState, useEffect } from "react";
@@ -66,7 +65,7 @@ function App() {
         <img src='/title_text.png' className='main-title' style={{ width: '30%', height: '35%' }} />
       </div>
       <div className='shareable-guesses'>
-        {gotCorrect && <div className='shareable-copy-text' onClick={handleCopy}>{copied ? "Copied!" : "Click Here to Copy Results and Share!"}</div>}
+        {gotCorrect && <div className='shareable-copy-text' onClick={handleCopy}>{copied ? "Copied!" : <img src='/share_white.png' className='share-button' alt='Share Results'/>}</div>}
       </div>
       <div className='guess-area'>
         <GuessArea guesses={guesses} setGuesses={setGuesses} setGotCorrect={setGotCorrect} ANIMATIONTIME={ANIMATIONTIME} />
