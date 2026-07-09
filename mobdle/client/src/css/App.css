@@ -107,6 +107,21 @@ body {
   rotate: 15deg;
 }
 
+.shareable-guesses-clicked {
+  opacity: 0;
+  display: flex;
+  width: fit-content;
+  /*margin: 0 auto; Shorthand for <top-down> <right-left> auto will evenly distribute since margin-left and right are auto, so it centers on the width*/
+  margin-top: 15px;
+  margin-left: auto;
+  margin-right: auto;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  animation: fadeIn 1.5s ease-in-out forwards 2.0s;
+  color: rgb(19, 240, 19);
+}
+
 .shareable-guesses {
   opacity: 0;
   display: flex;

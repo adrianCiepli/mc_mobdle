@@ -68,7 +68,7 @@ function App() {
       </div>
       {/* {gotCorrect && <div className='shareable-guesses' onClick={handleCopy}><img src='/share_white.png' className='share-button' alt='Share Button' />
         <div className='shareable-copy-text'>{copied ? "Copied!" : "Share results"}</div></div>} */}
-      {gotCorrect && <div>{copied ? <div className='shareable-guesses'><img src='/checkmark.png' className='share-button' alt='Checkmark' /><div className='shareable-copy-text'>Copied!</div></div> :
+      {gotCorrect && <div>{copied ? <div className='shareable-guesses-clicked'><img src='/checkmark2.png' className='share-button' alt='Checkmark' /><div className='shareable-copy-text'>Copied!</div></div> :
         <div className='shareable-guesses' onClick={handleCopy}><img src='/share_white.png' className='share-button' alt='Share Button' /><div className='shareable-copy-text'>Share results</div></div>}</div>}
 
       <div className='guess-area'>
@@ -82,3 +82,4 @@ function App() {
 }
 
 export default App;
+
