@@ -14,8 +14,10 @@
 }
 
 .input-area {
-    aspect-ratio: 5 / 1; /* First value is width, second is height */
-    height: 20%;
+    /* aspect-ratio: 5 / 1;
+    height: 20%; */
+    width: 18vw;
+    height: 3.5vw;
     font-size: 30px;
     text-align: center;
     font-family: "Tiny5", sans-serif;
