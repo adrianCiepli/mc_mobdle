@@ -113,6 +113,8 @@ body {
   width: fit-content;
   /*margin: 0 auto; Shorthand for <top-down> <right-left> auto will evenly distribute since margin-left and right are auto, so it centers on the width*/
   margin-top: 15px;
+  margin-left: auto;
+  margin-right: auto;
   flex-direction: column;
   justify-content: center;
   align-items: center;
