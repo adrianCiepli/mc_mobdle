@@ -55,17 +55,15 @@ body::before {
   content: "";
   position: fixed;
   top: 0;
+  right: 0;
+  bottom: 0;
   left: 0;
-  width: 100%;
-  height: 100%;
   z-index: -1;
   background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),
     url('https://livewallpapers4free.com/wp-content/uploads/2025/03/garden-lake-minecraft-4k-live_thumb1-scaled.jpg');
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
-  height: 100svh; 
-  /*locks the height calculation strictly to the screen size when the address bar is fully visible, so it won't snap fit when hidden*/
 }
 
 #root {
@@ -369,9 +367,9 @@ so the child's margin has something to push against inside the parent rather tha
     content: "";
     position: fixed;
     top: 0;
+    right: 0;
+    bottom: 0;
     left: 0;
-    width: 100%;
-    height: 100%;
     z-index: -1;
     background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),
       url('https://www.wallpaperalchemy.com/storage/wallpapers/259/minecraft-4k-wallpaper-sunlit-forest-canopy-card.jpg');
