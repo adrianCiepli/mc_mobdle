@@ -55,9 +55,13 @@ body::before {
   content: "";
   position: fixed;
   top: 0;
-  right: 0;
-  bottom: 0;
   left: 0;
+  width: 100vw;
+  height: 100vh;
+  /* fixed viewport height unit, lvh is w/o address bar, svh is w/. This makes it so address bar vanishing doesn't recalculate size 
+  with vw or %. Keep base vh just in case browser doesn't support lvh, in which case we just tank the snap-resizing on scroll */
+  height: 100lvh;
+  /* wins in browsers that support it, overrides line above */
   z-index: -1;
   background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),
     url('https://livewallpapers4free.com/wp-content/uploads/2025/03/garden-lake-minecraft-4k-live_thumb1-scaled.jpg');
@@ -367,9 +371,12 @@ so the child's margin has something to push against inside the parent rather tha
     content: "";
     position: fixed;
     top: 0;
-    right: 0;
-    bottom: 0;
     left: 0;
+    width: 100vw;
+    height: 100vh;
+    /* fallback for older browsers */
+    height: 100lvh;
+    /* wins in browsers that support it, overrides line above */
     z-index: -1;
     background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),
       url('https://www.wallpaperalchemy.com/storage/wallpapers/259/minecraft-4k-wallpaper-sunlit-forest-canopy-card.jpg');
