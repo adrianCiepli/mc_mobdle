@@ -29,7 +29,8 @@
   font-style: normal;
 }
 
-html, body {
+html,
+body {
   margin: 0;
   padding: 0;
   height: 100%;
@@ -51,12 +52,12 @@ so the child's margin has something to push against inside the parent rather tha
 
 body {
   height: 100%;
-  background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('https://i.pinimg.com/originals/1c/35/5a/1c355a72ace613f0134ac9d551397272.jpg');
+  background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('https://i.pinimg.com/originals/1c/35/5a/1c355a72ace613f0134ac9d551397272.jpg');
   /* Alt BG: https://assets.badlion.net/blog/minecraft-backgrounds/minecraft-mods-back.webp */
   background-repeat: no-repeat;
   background-size: cover;
   background-attachment: fixed;
-  background-color: rgba(0,0,0,0.5);
+  background-color: rgba(0, 0, 0, 0.5);
 }
 
 .title-area {
@@ -68,28 +69,31 @@ body {
 }
 
 .main-title {
+  width: 30%;
+  height: 35%;
   line-height: 0.8;
   font-size: 140px;
   font-family: "Tiny5", sans-serif;
   text-align: center;
-  color: #AAAAAA; /* Main face: Light Gray */
+  color: #AAAAAA;
+  /* Main face: Light Gray */
   margin-bottom: 0;
   margin-top: 0;
   animation: dropIn 1.8s ease-in-out forwards;
-  
+
   /* The "Bevel & Pop" Logic */
-  text-shadow: 
+  text-shadow:
     /* 1. Light highlight (Top-Left) makes it pop */
-    -2px -2px 0px #DDD, 
-    
+    -2px -2px 0px #DDD,
+
     /* 2. Dark Gray depth (Bottom & Right) */
-    2px 2px 0px #555, 
-    4px 4px 0px #555, 
-    
+    2px 2px 0px #555,
+    4px 4px 0px #555,
+
     /* 3. Final Black Silhouette (Far Bottom-Right) */
     6px 6px 0px #000,
     8px 8px 0px #000;
-    
+
   /* Optional: Stronger contrast for the font */
   letter-spacing: 4px;
 }
@@ -98,11 +102,12 @@ body {
   opacity: 0;
   margin-top: 0;
   margin-bottom: 0;
-  font-size: 1.1vw; /* 1.1% of the viewport width */
+  font-size: 1.1vw;
+  /* 1.1% of the viewport width */
   font-family: "Tiny5", sans-serif;
   color: yellow;
   animation: fadeIn 1.5s ease-in-out forwards 1.8s,
-              pulse 2s infinite ease-in-out 1.8s;
+    pulse 2s infinite ease-in-out 1.8s;
   margin-left: 30%;
   rotate: 15deg;
 }
@@ -193,20 +198,210 @@ body {
 @keyframes dropIn {
   0% {
     opacity: 0;
-    transform: translateY(-50px); /* Starts 50px higher */
+    transform: translateY(-50px);
+    /* Starts 50px higher */
   }
+
   100% {
     opacity: 1;
-    transform: translateY(0);    /* Ends at its natural position */
+    transform: translateY(0);
+    /* Ends at its natural position */
   }
 }
 
 @keyframes pulse {
-  0% { transform: scale(1); }
-  50% { transform: scale(0.95); }
-  100% { transform: scale(1); }
+  0% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(0.95);
+  }
+
+  100% {
+    transform: scale(1);
+  }
 }
 
 
-/* Confetti Stuff */
+@media (max-width: 800px) {
+  .under-title {
+    opacity: 0;
+    margin-top: 0;
+    margin-bottom: 0;
+    font-size: 2vw;
+    /* 1.1% of the viewport width */
+    font-family: "Tiny5", sans-serif;
+    color: yellow;
+    animation: fadeIn 1.5s ease-in-out forwards 1.8s,
+      pulse 2s infinite ease-in-out 1.8s;
+    margin-left: 60%;
+    rotate: 15deg;
+  }
 
+  .main-title {
+    width: 60%;
+    line-height: 0.8;
+    font-size: 140px;
+    font-family: "Tiny5", sans-serif;
+    text-align: center;
+    color: #AAAAAA;
+    /* Main face: Light Gray */
+    margin-bottom: 0;
+    margin-top: 0;
+    animation: dropIn 1.8s ease-in-out forwards;
+
+    /* The "Bevel & Pop" Logic */
+    text-shadow:
+      /* 1. Light highlight (Top-Left) makes it pop */
+      -2px -2px 0px #DDD,
+
+      /* 2. Dark Gray depth (Bottom & Right) */
+      2px 2px 0px #555,
+      4px 4px 0px #555,
+
+      /* 3. Final Black Silhouette (Far Bottom-Right) */
+      6px 6px 0px #000,
+      8px 8px 0px #000;
+
+    /* Optional: Stronger contrast for the font */
+    letter-spacing: 4px;
+  }
+
+  .input-area {
+    width: 40vw;
+    height: 7vw;
+    font-size: 20px;
+  }
+
+  .Option img {
+    /* If doing general tag selectors, specify component, because this will affect ALL <img> tags in EVERY COMPONENT, EVEN APP.JSX*/
+    height: 55px;
+    width: auto;
+    margin-right: 20px;
+    margin-left: 6px;
+  }
+
+  .name {
+    color: white;
+    font-family: "Tiny5", sans-serif;
+    font-size: 20px;
+  }
+}
+
+
+@media (max-width: 500px) {
+  .under-title {
+    opacity: 0;
+    margin-top: 0;
+    margin-bottom: 0;
+    font-size: 3vw;
+    /* 1.1% of the viewport width */
+    font-family: "Tiny5", sans-serif;
+    color: yellow;
+    animation: fadeIn 1.5s ease-in-out forwards 1.8s,
+      pulse 2s infinite ease-in-out 1.8s;
+    margin-left: 70%;
+    rotate: 15deg;
+    text-align: center;
+  }
+
+  .main-title {
+    width: 80%;
+    line-height: 0.8;
+    font-size: 140px;
+    font-family: "Tiny5", sans-serif;
+    text-align: center;
+    color: #AAAAAA;
+    /* Main face: Light Gray */
+    margin-bottom: 0;
+    margin-top: 0;
+    animation: dropIn 1.8s ease-in-out forwards;
+
+    /* The "Bevel & Pop" Logic */
+    text-shadow:
+      /* 1. Light highlight (Top-Left) makes it pop */
+      -2px -2px 0px #DDD,
+
+      /* 2. Dark Gray depth (Bottom & Right) */
+      2px 2px 0px #555,
+      4px 4px 0px #555,
+
+      /* 3. Final Black Silhouette (Far Bottom-Right) */
+      6px 6px 0px #000,
+      8px 8px 0px #000;
+
+    /* Optional: Stronger contrast for the font */
+    letter-spacing: 4px;
+  }
+
+  .input-area {
+    width: 50vw;
+    height: 10vw;
+    font-size: 15px;
+  }
+
+  .Option img {
+    /* If doing general tag selectors, specify component, because this will affect ALL <img> tags in EVERY COMPONENT, EVEN APP.JSX*/
+    height: 40px;
+    width: auto;
+    margin-right: 15px;
+    margin-left: 6px;
+  }
+
+  .name {
+    color: white;
+    font-family: "Tiny5", sans-serif;
+    font-size: 15px;
+  }
+
+  .Dropdown {
+    display: flex;
+    flex-direction: column;
+    gap: 0px;
+    background-color: gray;
+    max-height: 160px;
+    overflow-y: auto;
+    max-width: 51.99vw;
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(8, 50px);
+    column-gap: 3px;
+    row-gap: 7px;
+    align-items: center;
+  }
+
+  .GuessDisplay p {
+    font-family: Tiny5, sans-serif;
+    color: #fff;
+    font-size: 11.5px;
+    max-width: 200px;
+    text-align: center;
+  }
+
+  .Tile {
+    width: 100%;
+    aspect-ratio: 1/1;
+    margin: 0;
+  }
+
+  p.text {
+    font-size: 11.5px;
+    text-align: center;
+    padding: 20px 3px;
+    -webkit-user-select: none;
+    user-select: none;
+  }
+
+  .shareable-copy-text {
+    font-family: "Tiny5", sans-serif;
+    font-size: 12px;
+    text-align: center;
+    margin-top: 10px;
+    user-select: none;
+    display: inline-block;
+    /* animation: fadeIn 1.5s ease-in-out forwards 2.0s; */
+  }
+}
