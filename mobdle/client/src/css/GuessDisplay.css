@@ -63,9 +63,9 @@
 @media (max-width: 500px) {
     .grid {
         display: grid;
-        grid-template-columns: repeat(8, 50px);
+        grid-template-columns: repeat(8, 11.5vw);
         column-gap: 3px;
-        row-gap: 7px;
+        row-gap: 20px;
         align-items: center;
     }
 

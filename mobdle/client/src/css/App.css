@@ -34,6 +34,36 @@ body {
   margin: 0;
   padding: 0;
   height: 100%;
+  /* Prevents the body itself from bouncing/scrolling weirdly on mobile */
+  overflow-x: hidden;
+}
+
+body {
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  /* Fallback color */
+}
+
+
+/*
+This is an element inside body with position:fixed meaning it will not abide by body's changes, stays fixed to viewport.
+All properties that would refer to the parent now look at the viewport itself (width, height, top, left)
+This is especially good because with mobile, the browser will often resize the body, making the bg img quite odd
+since the searchbar appears and disappears and stuff like that
+*/
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),
+    url('https://cloud.wallsflow.com/posts/2026-03/8ec5ad3a66_minecraft-enchanted-forest-sun-rays-wallsflow-com.webp');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
 }
 
 #root {
@@ -48,16 +78,6 @@ so the child's margin has something to push against inside the parent rather tha
 */
 .App {
   padding-top: 1px;
-}
-
-body {
-  height: 100%;
-  background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('https://i.pinimg.com/originals/1c/35/5a/1c355a72ace613f0134ac9d551397272.jpg');
-  /* Alt BG: https://assets.badlion.net/blog/minecraft-backgrounds/minecraft-mods-back.webp */
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-attachment: fixed;
-  background-color: rgba(0, 0, 0, 0.5);
 }
 
 .title-area {
@@ -318,20 +338,18 @@ body {
     margin-top: 0;
     animation: dropIn 1.8s ease-in-out forwards;
 
-    /* The "Bevel & Pop" Logic */
     text-shadow:
-      /* 1. Light highlight (Top-Left) makes it pop */
+      /* (Top-Left) */
       -2px -2px 0px #DDD,
 
-      /* 2. Dark Gray depth (Bottom & Right) */
+      /* (Bottom & Right) */
       2px 2px 0px #555,
       4px 4px 0px #555,
 
-      /* 3. Final Black Silhouette (Far Bottom-Right) */
+      /* (Far Bottom-Right) */
       6px 6px 0px #000,
       8px 8px 0px #000;
 
-    /* Optional: Stronger contrast for the font */
     letter-spacing: 4px;
   }
 
@@ -344,4 +362,32 @@ body {
     display: inline-block;
     /* animation: fadeIn 1.5s ease-in-out forwards 2.0s; */
   }
+
+  body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),
+      url('https://i.pinimg.com/originals/4a/2c/e4/4a2ce46e4d17c017866512ec2fe5b92b.png?nii=t');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+  }
 }
+
+
+/*
+Alternate PC bgs:
+https://cloud.wallsflow.com/posts/2025-08/5ae6a8833d_minecrafts-hidden-valley.webp
+https://cloud.wallsflow.com/posts/2025-10/b684390901_minecraft-blossom-garden-live-wallpaper.webp
+https://cloud.wallsflow.com/posts/2026-03/8ec5ad3a66_minecraft-enchanted-forest-sun-rays-wallsflow-com.webp
+https://i.pinimg.com/originals/1c/35/5a/1c355a72ace613f0134ac9d551397272.jpg
+
+Mobile:
+https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTqnIUnixP1kNaFGG5xU0u0Y2QveIThQrovK7DXFOtvGRjxDLen5JWof0qP&s=10
+https://i.pinimg.com/originals/4a/2c/e4/4a2ce46e4d17c017866512ec2fe5b92b.png?nii=t
+*/

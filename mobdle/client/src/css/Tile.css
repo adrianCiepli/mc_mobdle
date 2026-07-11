@@ -82,7 +82,7 @@ p.text {
     }
 
     p.text {
-        font-size: 11.5px;
+        font-size: 2.5vw;
         text-align: center;
         padding: 20px 3px;
         -webkit-user-select: none;
