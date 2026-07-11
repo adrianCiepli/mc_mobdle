@@ -64,6 +64,8 @@ body::before {
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
+  height: 100svh; 
+  /*locks the height calculation strictly to the screen size when the address bar is fully visible, so it won't snap fit when hidden*/
 }
 
 #root {
