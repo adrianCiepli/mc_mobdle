@@ -2,15 +2,15 @@
 @import url('https://fonts.googleapis.com/css2?family=Tiny5&display=swap');
 
 .jersey-10-regular {
-  font-family: "Jersey 10", sans-serif;
-  font-weight: 400;
-  font-style: normal;
+    font-family: "Jersey 10", sans-serif;
+    font-weight: 400;
+    font-style: normal;
 }
 
 .tiny5-regular {
-  font-family: "Tiny5", sans-serif;
-  font-weight: 400;
-  font-style: normal;
+    font-family: "Tiny5", sans-serif;
+    font-weight: 400;
+    font-style: normal;
 }
 
 .input-area {
@@ -23,13 +23,23 @@
     font-family: "Tiny5", sans-serif;
     background-color: black;
     color: white;
-    outline: 2px solid white; /* Border adds it to outside of element's content area, outline does not */
+    outline: 2px solid white;
+    /* Border adds it to outside of element's content area, outline does not */
     box-shadow: none;
     transition: box-shadow 0.15s linear;
 }
 
-.input-area:focus { /* outline property tends to be quite choppy, box shadow is smoother */
-     box-shadow: 0 0 0 5px white;
+.input-area:focus {
+    /* outline property tends to be quite choppy, box shadow is smoother */
+    box-shadow: 0 0 0 5px white;
+}
+
+@media (max-width: 500px) {
+    .input-area {
+        width: 50vw;
+        height: 10vw;
+        font-size: 15px;
+    }
 }
 
 /*

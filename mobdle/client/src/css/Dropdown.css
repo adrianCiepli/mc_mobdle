@@ -6,3 +6,15 @@
     max-height: 240px;
     overflow-y: auto;
 }
+
+@media (max-width: 500px) {
+    .Dropdown {
+        display: flex;
+        flex-direction: column;
+        gap: 0px;
+        background-color: gray;
+        max-height: 160px;
+        overflow-y: auto;
+        max-width: 51.99vw;
+    }
+}

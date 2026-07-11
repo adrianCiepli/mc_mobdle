@@ -335,66 +335,6 @@ body {
     letter-spacing: 4px;
   }
 
-  .input-area {
-    width: 50vw;
-    height: 10vw;
-    font-size: 15px;
-  }
-
-  .Option img {
-    /* If doing general tag selectors, specify component, because this will affect ALL <img> tags in EVERY COMPONENT, EVEN APP.JSX*/
-    height: 40px;
-    width: auto;
-    margin-right: 15px;
-    margin-left: 6px;
-  }
-
-  .name {
-    color: white;
-    font-family: "Tiny5", sans-serif;
-    font-size: 15px;
-  }
-
-  .Dropdown {
-    display: flex;
-    flex-direction: column;
-    gap: 0px;
-    background-color: gray;
-    max-height: 160px;
-    overflow-y: auto;
-    max-width: 51.99vw;
-  }
-
-  .grid {
-    display: grid;
-    grid-template-columns: repeat(8, 50px);
-    column-gap: 3px;
-    row-gap: 7px;
-    align-items: center;
-  }
-
-  .GuessDisplay p {
-    font-family: Tiny5, sans-serif;
-    color: #fff;
-    font-size: 11.5px;
-    max-width: 200px;
-    text-align: center;
-  }
-
-  .Tile {
-    width: 100%;
-    aspect-ratio: 1/1;
-    margin: 0;
-  }
-
-  p.text {
-    font-size: 11.5px;
-    text-align: center;
-    padding: 20px 3px;
-    -webkit-user-select: none;
-    user-select: none;
-  }
-
   .shareable-copy-text {
     font-family: "Tiny5", sans-serif;
     font-size: 12px;

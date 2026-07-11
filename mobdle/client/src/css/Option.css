@@ -1,9 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Tiny5&display=swap');
 
 .tiny5-regular {
-  font-family: "Tiny5", sans-serif;
-  font-weight: 400;
-  font-style: normal;
+    font-family: "Tiny5", sans-serif;
+    font-weight: 400;
+    font-style: normal;
 }
 
 .Option {
@@ -21,7 +21,8 @@
     outline: none;
 }
 
-.Option img { /* If doing general tag selectors, specify component, because this will affect ALL <img> tags in EVERY COMPONENT, EVEN APP.JSX*/
+.Option img {
+    /* If doing general tag selectors, specify component, because this will affect ALL <img> tags in EVERY COMPONENT, EVEN APP.JSX*/
     height: 80px;
     width: auto;
     margin-right: 30px;
@@ -32,4 +33,20 @@
     color: white;
     font-family: "Tiny5", sans-serif;
     font-size: 30px;
+}
+
+@media (max-width: 500px) {
+    .Option img {
+        /* If doing general tag selectors, specify component, because this will affect ALL <img> tags in EVERY COMPONENT, EVEN APP.JSX*/
+        height: 40px;
+        width: auto;
+        margin-right: 15px;
+        margin-left: 6px;
+    }
+
+    .name {
+        color: white;
+        font-family: "Tiny5", sans-serif;
+        font-size: 15px;
+    }
 }

@@ -2,7 +2,7 @@
     width: 100%;
     aspect-ratio: 1/1;
     margin: 0;
-    
+
 }
 
 p.text {
@@ -15,7 +15,9 @@ p.text {
     user-select: none;
 }
 
-.correct, .wrong, .close {
+.correct,
+.wrong,
+.close {
     width: 100%;
     height: 100%;
     display: flex;
@@ -25,7 +27,9 @@ p.text {
     transition: transform 0.2s ease;
 }
 
-.correct:hover, .wrong:hover, .close:hover {
+.correct:hover,
+.wrong:hover,
+.close:hover {
     transform: translateY(-8px);
 }
 
@@ -68,4 +72,20 @@ p.text {
     background-repeat: no-repeat;
     background-size: contain;
     background-position: center;
+}
+
+@media (max-width: 500px) {
+    .Tile {
+        width: 100%;
+        aspect-ratio: 1/1;
+        margin: 0;
+    }
+
+    p.text {
+        font-size: 11.5px;
+        text-align: center;
+        padding: 20px 3px;
+        -webkit-user-select: none;
+        user-select: none;
+    }
 }
