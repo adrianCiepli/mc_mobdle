@@ -59,7 +59,8 @@ body::before {
   width: 100vw;
   height: 100vh;
   /* fixed viewport height unit, lvh is w/o address bar, svh is w/. This makes it so address bar vanishing doesn't recalculate size 
-  with vw or %. Keep base vh just in case browser doesn't support lvh, in which case we just tank the snap-resizing on scroll */
+  with vw or %. Keep base vh just in case browser doesn't support lvh, in which case we just tank the snap-resizing on scroll.
+  Use lvh instead of svh since we want it to be bigger than needed when address bar IS still there, not too small when vanishes */
   height: 100lvh;
   /* wins in browsers that support it, overrides line above */
   z-index: -1;
