@@ -64,14 +64,11 @@
 @media (max-width: 500px) {
     .grid {
         display: grid;
-        grid-template-columns: repeat(8, 11.5vw);
+        grid-template-columns: repeat(8, 11vw);
         column-gap: 3px;
         row-gap: 20px;
         align-items: center;
-    }
-
-    .grid>* {
-        min-width: 0;
+        justify-content: center;
     }
 
     .GuessDisplay p {
