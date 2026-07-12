@@ -23,7 +23,7 @@ p.text {
     display: flex;
     align-items: center;
     justify-content: center;
-    border: 2px solid rgb(199, 198, 198);
+    outline: 2px solid rgb(199, 198, 198);
     transition: transform 0.2s ease;
 }
 
