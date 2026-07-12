@@ -52,7 +52,7 @@ function GuessDisplay({guesses, setGuesses, ANIMATIONTIME}) {
     return (
         <div className="GuessDisplay">
             <div className="grid">
-                <p>Name</p><p>Dimension</p><p>Hostility</p><p>Hearts</p><p>Movement</p><p>Height</p><p>Tameable</p><p>Release</p>
+                <div className="row" key={0}><p>Name</p><p>Dimension</p><p>Hostility</p><p>Hearts</p><p>Movement</p><p>Height</p><p>Tameable</p><p>Release</p></div>
             {guesses.map((guess, index) => {
                 const g = mobs[guess.name];
                 let lastTile = "";
@@ -67,7 +67,7 @@ function GuessDisplay({guesses, setGuesses, ANIMATIONTIME}) {
                 const interval = (ANIMATIONTIME - 1) / 7;
                 if (index === 0) {
                     return (
-                        <div className="row" key={guesses.length - index}>
+                        <div className="row" key={guesses.length - index+1}>
                             <div className={lastTile} style={{animationDelay: `${interval * 7}s`}}><Tile type={"r/w"} value={guess.name} correctness={guess.correct} special={""}/></div>
                             <div className={lastTile} style={{animationDelay: `${interval * 0}s`}}><Tile type={"r/w"} value={g.dimension.split(",").join(", ")} correctness={guess.dimension} special={""}/></div>
                             <div className={lastTile} style={{animationDelay: `${interval * 1}s`}}><Tile type={"r/w"} value={g.hostility} correctness={guess.hostility} special={""} /></div>
@@ -82,7 +82,7 @@ function GuessDisplay({guesses, setGuesses, ANIMATIONTIME}) {
                     )  
                 } else {
                     return (
-                        <div className="row" key={guesses.length - index}>
+                        <div className="row" key={guesses.length - index+1}>
                             <div className={lastTile}><Tile type={"r/w"} value={guess.name} correctness={guess.correct} special={""}/></div>
                             <div className={lastTile}><Tile type={"r/w"} value={g.dimension.split(",").join(", ")} correctness={guess.dimension} special={""}/></div>
                             <div className={lastTile}><Tile type={"r/w"} value={g.hostility} correctness={guess.hostility} special={""} /></div>
