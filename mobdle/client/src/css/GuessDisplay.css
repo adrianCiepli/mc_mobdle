@@ -78,4 +78,10 @@
         max-width: 200px;
         text-align: center;
     }
+
+    .grid>* {
+        width: 100% !important;
+        max-width: 100% !important;
+        box-sizing: border-box;
+    }
 }
