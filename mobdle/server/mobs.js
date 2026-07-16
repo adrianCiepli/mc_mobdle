@@ -22,6 +22,7 @@ const mobs = {
   "Ocelot": { dimension: "Overworld", hostility: "Passive", hp: 2.5, movement: "Walking", height: 0.7, tameable: false, releaseVersion: "1.2.1" },
   "Parrot": { dimension: "Overworld", hostility: "Passive", hp: 1.5, movement: "Flying", height: 0.9, tameable: true, releaseVersion: "1.12" },
   "Pig": { dimension: "Overworld", hostility: "Passive", hp: 2.5, movement: "Walking", height: 0.9, tameable: false, releaseVersion: "1.0" },
+  "Pufferfish": { dimension: "Overworld", hostility: "Neutral", hp: 1.5, movement: "Swimming", height: 0.7, tameable: false, releaseVersion: "1.13" },
   "Rabbit": { dimension: "Overworld", hostility: "Passive", hp: 1.5, movement: "Jumping", height: 0.5, tameable: false, releaseVersion: "1.8" },
   "Salmon": { dimension: "Overworld", hostility: "Passive", hp: 1.5, movement: "Swimming", height: 0.4, tameable: false, releaseVersion: "1.13" },
   "Sheep": { dimension: "Overworld", hostility: "Passive", hp: 2, movement: "Walking", height: 1.3, tameable: false, releaseVersion: "1.0" },
