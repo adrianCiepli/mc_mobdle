@@ -18,15 +18,18 @@ export default function handler(req, res) {
 
     try {
         // Vercel pre-parses JSON bodies directly onto req.body
-        const { userGuess } = req.body;
+        const { userGuess, userTimeZone } = req.body;
         if (!userGuess) {
             return res.status(400).json({ error: 'Missing userGuess parameter' });
+        }
+        if (!userTimeZone) {
+            return res.status(400).json({ error: 'Missing userTimeZone parameter' });
         }
         // The user's guess' mob's name was converted to lower for some comparison-ease in the logic in GuessArea.jsx, but we need to match mobs.js with capital start
         // We send to GuessDisplay.jsx which also needs to use the name we but into the res to index mobs.js, so send it also as a capital
         const formattedKey = capitalizeAll(userGuess);
         const g = mobs[formattedKey];
-        const ans = getDailyAnswer();
+        const ans = getDailyAnswer(userTimeZone);
 
         // Sanity check just in case some edge case gets hit
         if (!g) {
@@ -139,7 +142,7 @@ export default function handler(req, res) {
             }
         }
 
-        const feedbackPayload = {name: formattedKey, correct: correct, dimension: dimension, hostility: hostility, movement: movement, tameable: tameable, hp: hp, height: height, release: release};
+        const feedbackPayload = { name: formattedKey, correct: correct, dimension: dimension, hostility: hostility, movement: movement, tameable: tameable, hp: hp, height: height, release: release };
         return res.status(200).json(feedbackPayload);
     } catch (err) {
         return res.status(500).json({ error: err.message, stack: err.stack });

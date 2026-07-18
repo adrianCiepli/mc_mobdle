@@ -1,18 +1,19 @@
 import mobs from "./mobs.js";
 
-// TODO: Account for user's personal time so that each user from different timezone can get new answer at 12:00
-// OR: Have a countdown on the website to when there will be a new answer so that they know, and then can use UTC
-// Ensure that in whichever case, GuessArea.jsx uses time as well to check for localStorage clearing, so update accordingly there
-
-const getDailyAnswer = () => {
+const getDailyAnswer = (userTimeZone) => {
   const mobKeys = Object.keys(mobs);
 
-  // Generate a stable date based on Eastern Time (Ontario), not UTC.
-  // Intl.DateTimeFormat with timeZone handles the EST/EDT daylight-saving
-  // switch automatically, so we don't have to hardcode a fixed UTC offset.
+  // Intl is internationalization object that is native, deals with stuff that depends on nation/location
+  // Intl.DateTimeFormat() is a method that returns an object with stored properties about how to interpret a Date object
+  //    when given no params, it will return the object with the params filled in with the executing device's internal defaults (the executors timeZone, location, ...)
+  // Date() object is essentially just a numeric value of milliseconds since some day in UTC
+  // We can pass the Date object into the formatter given it's values, and it will interpret that given the localization it was set to, to give a timezone's date in some format
+  // You can take the Intl.DateTimeFormat() object and call .resolvedOption() on it, which returns and object of all of the formatter's properties with values
+  // This will include things you did not specify that had default values found for them
+  // You can do Intl.DateTimeFormat().resolvedOptions() to get the object of all the default DateTime option on the executor's machine, so use .timeZone to extract user timezone
   const now = new Date();
   const formatter = new Intl.DateTimeFormat("en-CA", {
-    timeZone: "America/Toronto",
+    timeZone: userTimeZone,
     year: "numeric",
     month: "2-digit",
     day: "2-digit",

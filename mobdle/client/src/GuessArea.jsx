@@ -11,9 +11,9 @@ function GuessArea({ guesses, setGuesses, setGotCorrect, ANIMATIONTIME }) {
     const [disabled, setDisabled] = useState(false);
 
     // Temporarily, while we only have players in Toronto
-    function getTorontoDateString() {
+    function getUserDateString() {
         const formatter = new Intl.DateTimeFormat("en-CA", {
-            timeZone: "America/Toronto",
+            timeZone: Intl.DateTimeFormat().resolvedOptions().timeZone,
             year: "numeric",
             month: "2-digit",
             day: "2-digit",
@@ -32,7 +32,7 @@ function GuessArea({ guesses, setGuesses, setGotCorrect, ANIMATIONTIME }) {
     // To prevent this from running unnecessarily on EVERY render, this should only run on initial render where a refresh would destroy this needed state
     useEffect(() => {
         // const today = new Date().toLocaleDateString();
-        const today = getTorontoDateString();
+        const today = getUserDateString();
         if (localStorage.guesses) {
             // localstorage always stores strings in the attributes, so store an object, we need the JSON methods
             // JSON.parse(string) turns a formatted JSON string into an appropriate object
@@ -100,7 +100,7 @@ function GuessArea({ guesses, setGuesses, setGotCorrect, ANIMATIONTIME }) {
                 fetch("api/handle-guess", {
                     method: "POST",
                     headers: {"Content-type": "application/json"},
-                    body: JSON.stringify({ userGuess: value })}
+                    body: JSON.stringify({ userGuess: value, userTimeZone: Intl.DateTimeFormat().resolvedOptions().timeZone })}
                 ).then((res) => {
                     if (!res.ok) {
                         throw new Error("Fetch completed but server responded with some error");
