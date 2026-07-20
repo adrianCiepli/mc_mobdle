@@ -39,7 +39,6 @@ const mobs = {
   // NEUTRAL MOBS
   "Bee": { dimension: "Overworld", hostility: "Neutral", hp: 2.5, movement: "Flying", height: 0.6, tameable: false, releaseVersion: "1.15" },
   "Cave Spider": { dimension: "Overworld", hostility: "Neutral", hp: 3, movement: "Walking,Climbing", height: 0.5, tameable: false, releaseVersion: "1.0" },
-  "Crab": { dimension: "Overworld", hostility: "Neutral", hp: 3, movement: "Walking", height: 0.5, tameable: false, releaseVersion: "1.22" },
   "Dolphin": { dimension: "Overworld", hostility: "Neutral", hp: 2.5, movement: "Swimming", height: 0.6, tameable: false, releaseVersion: "1.13" },
   "Enderman": { dimension: "Any", hostility: "Neutral", hp: 10, movement: "Teleport,Walking", height: 2.9, tameable: false, releaseVersion: "1.0" },
   "Fox": { dimension: "Overworld", hostility: "Neutral", hp: 2.5, movement: "Walking", height: 0.7, tameable: false, releaseVersion: "1.14" },
