@@ -208,7 +208,6 @@ so the child's margin has something to push against inside the parent rather tha
   justify-content: center;
   animation: fadeIn 1.5s ease-in-out forwards 2.0s;
   z-index: 1;
-  margin-bottom: 5px;
 }
 
 
