@@ -36,7 +36,7 @@ body {
   height: 100%;
   /* Prevents the body itself from bouncing/scrolling weirdly on mobile */
   overflow-x: hidden;
-  overflow-y: scroll;
+  overscroll-behavior: none;
 }
 
 body {
