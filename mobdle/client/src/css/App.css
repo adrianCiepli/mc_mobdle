@@ -29,19 +29,26 @@
   font-style: normal;
 }
 
+html {
+  position: fixed;
+  overflow: hidden;
+}
+
 html,
 body {
   margin: 0;
   padding: 0;
   height: 100%;
   /* Prevents the body itself from bouncing/scrolling weirdly on mobile */
-  overflow-x: hidden;
+  /* overflow-x: hidden; */
 }
 
 body {
   height: 100%;
   background-color: rgba(0, 0, 0, 0.5);
   /* Fallback color */
+  position: relative;
+  overflow: auto;
 }
 
 
