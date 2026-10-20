@@ -52,9 +52,9 @@ function App() {
     let text = '';
     if (gaveUp || guesses.some(g => g.correct === "gave-up")) { // the gaveUp hook is false off refresh, setting it on finished-game load would trigger fetch, can't use on its own
       const numAttempts = guesses.length - 1;
-      text = `Mobdle (${todayStr}) - Gave Up after ${numAttempts} attempts\n\n${temp}`;
+      text = `Mobdle (${todayStr}) - GAVE UP after ${numAttempts} attempt(s)\n\n${temp}`;
     } else {
-      text = `Mobdle (${todayStr}) - ${guesses.length} attempts\n\n${temp}`;
+      text = `Mobdle (${todayStr}) - ${guesses.length} attempt(s)\n\n${temp}`;
     }
     setGuessShareable(text);
   }, [guesses, gaveUp])
@@ -76,7 +76,7 @@ function App() {
   return (
     <div className="App">
       <div className='title-area'>
-        <button className='give-up-button' onClick={handleGiveUp} disabled={disabled}>Give Up ☹</button>
+        <button className='give-up-button' onClick={handleGiveUp} disabled={true || disabled}>Give Up ☹</button>
         <p className='under-title'>The Minecraft Mob Guessing Game</p>
         <img src='/title_text.png' className='main-title' draggable={false}/>
       </div>
