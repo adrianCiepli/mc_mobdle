@@ -22,7 +22,7 @@ function TextGuess({ textContent, inGuessArea, setTextContent, handleSubmit, dis
     return (
         <div className="TextGuess">
             <form onSubmit={(e) => {handleSubmit(e, textContent)}}>
-                <input className="input-area" type="text" value={textContent} placeholder="Enter your guess..." onChange={onChange} ref={inputElement} disabled={disabled} />
+                <input className="input-area" type="text" value={disabled ? textContent : ""} placeholder="Enter your guess..." onChange={onChange} ref={inputElement} disabled={disabled} />
             </form>
         </div>
     )
