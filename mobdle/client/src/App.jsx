@@ -24,6 +24,8 @@ function App() {
     img.src = '/share_white.png';
   }, []);
 
+  // Share button functionality
+  // ===========================================
   useEffect(() => {
     const formatter = new Intl.DateTimeFormat("en-CA", {
       timeZone: "America/Toronto",
@@ -32,7 +34,6 @@ function App() {
       day: "2-digit",
     });
     const todayStr = formatter.format(new Date()); // YYYY-MM-DD
-
     const cols = ["correct", "dimension", "hostility", "hp", "movement", "height", "tameable", "release"];
     const temp = guesses.map(guess => {
       return cols.map(col => {
@@ -58,16 +59,15 @@ function App() {
       }, 5000);
     });
   };
+  // ===========================================
 
   return (
     <div className="App">
       <div className='title-area'>
+        <button className='give-up-button' disabled>Give Up ☹</button>
         <p className='under-title'>The Minecraft Mob Guessing Game</p>
-        {/* <h1 className="main-title">Mobdle</h1> */}
-        <img src='/title_text.png' className='main-title' />
+        <img src='/title_text.png' className='main-title' draggable={false}/>
       </div>
-      {/* {gotCorrect && <div className='shareable-guesses' onClick={handleCopy}><img src='/share_white.png' className='share-button' alt='Share Button' />
-        <div className='shareable-copy-text'>{copied ? "Copied!" : "Share results"}</div></div>} */}
       {gotCorrect && <div>{copied ? <div className='shareable-guesses-clicked'><img src='/checkmark2.png' className='share-button' alt='Checkmark' /><div className='shareable-copy-text'>Copied!</div></div> :
         <div className='shareable-guesses' onClick={handleCopy}><img src='/share_white.png' className='share-button' alt='Share Button' /><div className='shareable-copy-text'>Share results</div></div>}</div>}
 

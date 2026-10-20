@@ -109,7 +109,7 @@ function GuessArea({ guesses, setGuesses, setGotCorrect, ANIMATIONTIME }) {
                 }).then((resBody) => {
                     const newGuesses = [resBody, ...guesses];
                     setGuesses(newGuesses);
-                    localStorage.guesses = JSON.stringify(newGuesses);
+                    localStorage.guesses = JSON.stringify(newGuesses); 
                     setTextContent("");
                     setDisabled(true);
                     setInGuessArea(false); // bluring handled in TextGuess.jsx

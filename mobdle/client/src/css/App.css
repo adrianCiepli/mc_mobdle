@@ -86,12 +86,54 @@ so the child's margin has something to push against inside the parent rather tha
   padding-top: 1px;
 }
 
+.give-up-button {
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-left: 20px;
+  padding-right: 20px;
+  position: absolute; 
+  /* Looks at nearest position: relative; element to reference for coordinates. 
+  Children of the same parent that are NOT specified position:...; do not move at all relative to this position, they can literally overlap over each other */
+  left: 0;
+  margin-left: 2vw;
+  user-select: none;
+  background-color: rgb(172, 172, 172);
+  font-family: "Tiny5", sans-serif;
+  color: white;
+
+  border-top: 3px solid #d1d5db;
+  border-left: 3px solid #d1d5db;
+  border-right: 3px solid #4b5563;
+  border-bottom: 5px solid #4b5563;
+  box-shadow: 0 0 0 2px #000000; 
+}
+
+.give-up-button:hover {
+  box-shadow: 0 0 0 2px #fdfdfd; 
+}
+
+.give-up-button:active {
+  background-color: rgb(117, 117, 117);
+  padding-right: 21px;
+  border-right: 2px solid #4b5563;
+  padding-bottom: 13px;
+  border-bottom: 2px solid #4b5563;
+}
+
+.give-up-button:disabled {
+    box-shadow: 0 0 0 0px #000000;
+    background-color: rgb(201, 201, 201);
+    color: rgb(150, 150, 150);
+}
+
 .title-area {
   display: flex;
+  position: relative; /* Only affects the fact that children that are 'absolute' look to this div as the 'anchor' coordinate sytem */
   flex-direction: column;
   margin-top: 60px;
   align-items: center;
   gap: 0;
+  width: 100%;
 }
 
 .main-title {
@@ -122,6 +164,7 @@ so the child's margin has something to push against inside the parent rather tha
 
   /* Optional: Stronger contrast for the font */
   letter-spacing: 4px;
+  user-select: none;
 }
 
 .under-title {

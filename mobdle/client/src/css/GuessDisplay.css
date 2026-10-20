@@ -25,6 +25,10 @@
     /* Makes it so that style-wise the div disappears and the children are direct children of parent (grid div .grid) */
 }
 
+.row p {
+    user-select: none;
+}
+
 .GuessDisplay {
     margin-bottom: 8px;
 }
