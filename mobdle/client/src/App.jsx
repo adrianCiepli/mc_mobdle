@@ -76,11 +76,11 @@ function App() {
   return (
     <div className="App">
       <div className='title-area'>
-        <button className='give-up-button' onClick={handleGiveUp} disabled={disabled}>Give Up ☹</button>
+        <button className='give-up-button' onClick={handleGiveUp} disabled={disabled || gotCorrect}>Give Up ☹</button>
         <p className='under-title'>The Minecraft Mob Guessing Game</p>
         <img src='/title_text.png' className='main-title' draggable={false}/>
       </div>
-      {gotCorrect && <div>{copied ? <div className='shareable-guesses-clicked'><img src='/checkmark2.png' className='share-button' alt='Checkmark' /><div className='shareable-copy-text'>Copied!</div></div> :
+      {gotCorrect && <div>{copied ? <div className='shareable-guesses clicked'><img src='/checkmark2.png' className='share-button' alt='Checkmark' /><div className='shareable-copy-text'>Copied!</div></div> :
         <div className='shareable-guesses' onClick={handleCopy}><img src='/share_white.png' className='share-button' alt='Share Button' /><div className='shareable-copy-text'>Share results</div></div>}</div>}
 
       <div className='guess-area'>
