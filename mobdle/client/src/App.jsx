@@ -76,7 +76,7 @@ function App() {
   return (
     <div className="App">
       <div className='title-area'>
-        <button className='give-up-button' onClick={handleGiveUp} disabled={true || disabled}>Give Up ☹</button>
+        <button className='give-up-button' onClick={handleGiveUp} disabled={disabled}>Give Up ☹</button>
         <p className='under-title'>The Minecraft Mob Guessing Game</p>
         <img src='/title_text.png' className='main-title' draggable={false}/>
       </div>
