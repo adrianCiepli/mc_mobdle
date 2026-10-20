@@ -32,7 +32,29 @@
 .name {
     color: white;
     font-family: "Tiny5", sans-serif;
-    font-size: 30px;
+    font-size: 22px;
+}
+
+@media (max-width: 1100px) {
+    .Option img {
+        height: 10vw;
+        width: auto
+    }
+
+    .name {
+        font-size: clamp(15px, 3vw, 28px);
+    }
+}
+
+@media (max-width: 800px) {
+    .Option img {
+        height: 50px;
+        width: auto
+    }
+
+    .name {
+        font-size: clamp(15px, 2vw, 30px);
+    }
 }
 
 @media (max-width: 500px) {

@@ -2,8 +2,7 @@ import './css/App.css';
 import GuessArea from "./GuessArea";
 import GuessDisplay from './GuessDisplay';
 import mobs from './data/mobs.js';
-import { useRef, useState, useEffect } from "react";
-import confetti from "canvas-confetti";
+import { useState, useEffect } from "react";
 
 function App() {
   const [guesses, setGuesses] = useState([]); // Format: // guess = {name, correct, dimension, hostility, hp, movement, height, tameable, release}
@@ -12,7 +11,8 @@ function App() {
   const [gotCorrect, setGotCorrect] = useState(false);
   const [guessShareable, setGuessShareable] = useState("");
   const [copied, setCopied] = useState(false);
-  // const answer = useRef(mobNames[Math.floor(Math.random() * mobNames.length)]);
+  const [gaveUp, setGaveUp] = useState(false);
+  const [disabled, setDisabled] = useState(false);
 
   // Non-functional code that just uses each .gif so that there is no initial-fetch lag the first time they are needed in DropDown menu
   useEffect(() => {
@@ -42,14 +42,22 @@ function App() {
           return "🟩";
         } else if (correctness === "neq" || correctness === "high-far" || correctness === "low-far") {
           return "🟥";
+        } else if (correctness === "gave-up") {
+          return "⬜";
         } else {
           return "🟨";
         }
       }).join(" "); // Each guess gets mapped to a list where each col in cols takes guess[col] and returns a coloured square in the new list, join into string for each guess
     }).join("\n\n"); // The entire array is (at first a list of lists) a list of strings, join them together into one string with lines separated
-    const text = `Mobdle (${todayStr}) - ${guesses.length} attempts\n\n${temp}`;
+    let text = '';
+    if (gaveUp || guesses.some(g => g.correct === "gave-up")) { // the gaveUp hook is false off refresh, setting it on finished-game load would trigger fetch, can't use on its own
+      const numAttempts = guesses.length - 1;
+      text = `Mobdle (${todayStr}) - Gave Up after ${numAttempts} attempts\n\n${temp}`;
+    } else {
+      text = `Mobdle (${todayStr}) - ${guesses.length} attempts\n\n${temp}`;
+    }
     setGuessShareable(text);
-  }, [guesses])
+  }, [guesses, gaveUp])
 
   const handleCopy = () => {
     navigator.clipboard.writeText(guessShareable).then(() => { // It's an async function that returns a Promise, put code that runs after copying is done here:
@@ -61,10 +69,14 @@ function App() {
   };
   // ===========================================
 
+  const handleGiveUp = () => {
+    setGaveUp(true);
+  }
+
   return (
     <div className="App">
       <div className='title-area'>
-        <button className='give-up-button' disabled>Give Up ☹</button>
+        <button className='give-up-button' onClick={handleGiveUp} disabled={disabled}>Give Up ☹</button>
         <p className='under-title'>The Minecraft Mob Guessing Game</p>
         <img src='/title_text.png' className='main-title' draggable={false}/>
       </div>
@@ -72,10 +84,11 @@ function App() {
         <div className='shareable-guesses' onClick={handleCopy}><img src='/share_white.png' className='share-button' alt='Share Button' /><div className='shareable-copy-text'>Share results</div></div>}</div>}
 
       <div className='guess-area'>
-        <GuessArea guesses={guesses} setGuesses={setGuesses} setGotCorrect={setGotCorrect} ANIMATIONTIME={ANIMATIONTIME} />
+        <GuessArea guesses={guesses} setGuesses={setGuesses} setGotCorrect={setGotCorrect} ANIMATIONTIME={ANIMATIONTIME} gaveUp={gaveUp} setGaveUp={setGaveUp}
+                    disabled={disabled} setDisabled={setDisabled} />
       </div>
       <div className='guess-display'>
-        <GuessDisplay guesses={guesses} setGuesses={setGuesses} ANIMATIONTIME={ANIMATIONTIME} />
+        <GuessDisplay guesses={guesses} ANIMATIONTIME={ANIMATIONTIME} />
       </div>
     </div>
   );

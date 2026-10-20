@@ -4,11 +4,10 @@ import { useState, useEffect } from "react";
 import mobs from "./data/mobs.js";
 import confetti from "canvas-confetti";
 
-function GuessArea({ guesses, setGuesses, setGotCorrect, ANIMATIONTIME }) {
+function GuessArea({ guesses, setGuesses, setGotCorrect, ANIMATIONTIME, gaveUp, setGaveUp, disabled, setDisabled }) {
     {/* Have a text field and a dropdown option that changes dynamically with typing */ }
     const [inGuessArea, setInGuessArea] = useState(false);
     const [textContent, setTextContent] = useState("");
-    const [disabled, setDisabled] = useState(false);
 
     // Temporarily, while we only have players in Toronto
     function getUserDateString() {
@@ -25,6 +24,7 @@ function GuessArea({ guesses, setGuesses, setGotCorrect, ANIMATIONTIME }) {
     // List.filter(predicateFunc) will run the predicate for every item and can use item as param, and returns new list of items for which predicate was true on running
     let mobOptions = Object.keys(mobs).filter((mobName) => { return mobName.toLowerCase().includes(textContent.toLowerCase()) });
 
+    
     /**
      * On refresh, React runs everything from scratch, so states get reset to defaults and the renders that happen right after the refresh are the intial renders.
      */
@@ -39,18 +39,19 @@ function GuessArea({ guesses, setGuesses, setGotCorrect, ANIMATIONTIME }) {
             // JSON.stringify(object) turns an object, including an array, into a JSON formatted string that localStorage can store
             if (localStorage.date === today) {
                 setGuesses(JSON.parse(localStorage.guesses));
-                const alreadySolved = JSON.parse(localStorage.guesses).some(g => g.correct === "eq");
+                const alreadySolved = JSON.parse(localStorage.guesses).some(g => g.correct === "eq" || g.correct === "gave-up");
                 if (alreadySolved) {
                     setDisabled(true);
                     setGotCorrect(true);
                 }
             } else {
                 localStorage.clear();
-                setGuesses([])
+                setGuesses([]);
             }
         }
         localStorage.date = today;
     }, [])
+
 
     const playConfetti = () => {
         var duration = 2 * 1000; // ms
@@ -74,6 +75,56 @@ function GuessArea({ guesses, setGuesses, setGotCorrect, ANIMATIONTIME }) {
             confetti({ ...defaults, particleCount, origin: { x: randomInRange(0.7, 0.9), y: Math.random() - 0.2 } });
         }, 250);
     }
+
+
+    const playGiveUpStuff = () => {
+        // Audio of 'boo'
+        // Some sort of sadness visuals I have yet to figure out
+    }
+
+
+    // GIVE UP FUNCTIONALITY - gaveUp boolean prop sent from App.jsx
+    // ================================================
+    useEffect(() => {
+        // can't use async function as useEffect func, since effect return is cleanup func, but async = return Promise
+        if (!gaveUp) {
+            return;
+        }
+        
+        const innerGiveUpFunc = async () => {
+            // handle the give up
+            setTextContent("");
+            setDisabled(true);
+            setInGuessArea(false);
+            console.log("Sending Give-Up to Server...");
+            try {
+                const rawResponse = await fetch("api/handle-give-up", {
+                    method: "POST",
+                    headers: {"Content-type": "application/json"},
+                    body: JSON.stringify({ userGiveUp: true, userTimeZone: Intl.DateTimeFormat().resolvedOptions().timeZone })
+                });
+                if (!rawResponse.ok) {
+                    throw new Error("Give-up Fetch completed but server responded with some error");
+                }
+                // rawResponse is a raw stream of bytes that can be formatted into valid JSON, but are not yet
+                const resBody = await rawResponse.json();
+                const newGuesses = [resBody, ...guesses];
+                setGuesses(newGuesses);
+                localStorage.guesses = JSON.stringify(newGuesses);
+                setTimeout(() => {
+                    playGiveUpStuff();
+                    setGotCorrect(true);
+                }, (ANIMATIONTIME - 0.5) * 1000);
+            } catch (err) {
+                setDisabled(false);
+                setGaveUp(false);
+                console.log('Error encountered in give-up fetching on frontend:', err);
+            }
+        }
+        innerGiveUpFunc();
+    }, [gaveUp]);
+    // ================================================
+
 
     const handleSubmit = (e, value) => {
         e.preventDefault();

@@ -2,8 +2,6 @@ import './css/Tile.css';
 
 function Tile({type, value, correctness, special}) {
     let classString = "";
-    let needUpArrow = false;
-    let needDownArrow = false;
 
     if (correctness === "eq") {
         classString = "correct";
@@ -17,6 +15,8 @@ function Tile({type, value, correctness, special}) {
         classString = "close uparrow";
     } else if (correctness === "low-far") {
         classString = "wrong uparrow";
+    } else if (correctness === "gave-up") {
+        classString = "gave-up";
     } else {
         classString = "close";
     }

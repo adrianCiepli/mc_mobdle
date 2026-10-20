@@ -27,6 +27,7 @@
     /* Border adds it to outside of element's content area, outline does not */
     box-shadow: none;
     transition: box-shadow 0.15s linear;
+    user-select: none;
 }
 
 .input-area:focus {
@@ -34,10 +35,18 @@
     box-shadow: 0 0 0 5px white;
 }
 
+@media (max-width: 1300px) {
+    .input-area {
+        width: clamp(20px, 34vw, 300px);
+        height: clamp(30px, 5vw,60px);
+        font-size: clamp(12px, 4vw, 30px);
+    }
+}
+
 @media (max-width: 500px) {
     .input-area {
         width: 50vw;
-        height: 10vw;
+        height: 4vh;
         font-size: 15px;
     }
 }

@@ -59,15 +59,24 @@
     animation: flip-in 1s ease-out forwards;
 }
 
-/* .tile-flip:nth-child(1) {animation-delay: 0s;}
-.tile-flip:nth-child(2) {animation-delay: 0.2s;}
-.tile-flip:nth-child(3) {animation-delay: 0.4s;}
-.tile-flip:nth-child(4) {animation-delay: 0.6s;}
-.tile-flip:nth-child(5) {animation-delay: 0.8s;}
-.tile-flip:nth-child(6) {animation-delay: 1s;}
-.tile-flip:nth-child(7) {animation-delay: 1.2s;} */
-
-/* nth-child doesn't select "the nth element with this class" — it selects elements that both have the class and are the nth child of their parent.*/
+@media (max-width: 1100px) {
+    .grid {
+        display: grid;
+        grid-template-columns: repeat(8, 11.7vw);
+        column-gap: 3px;
+        row-gap: 20px;
+        align-items: center;
+        justify-content: center;
+    }
+    
+    .GuessDisplay p {
+        font-family: Tiny5, sans-serif;
+        color: #fff;
+        font-size: 2vw;
+        max-width: 200px;
+        text-align: center;
+    }
+}
 
 @media (max-width: 500px) {
     .grid {
@@ -82,7 +91,7 @@
     .GuessDisplay p {
         font-family: Tiny5, sans-serif;
         color: #fff;
-        font-size: 11.5px;
+        font-size: clamp(6px, 2.5vw, 11.5px);
         max-width: 200px;
         text-align: center;
     }

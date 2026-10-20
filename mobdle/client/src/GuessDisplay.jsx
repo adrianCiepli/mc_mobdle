@@ -1,8 +1,7 @@
 import "./css/GuessDisplay.css";
 import Tile from "./Tile";
 import mobs from "./data/mobs.js";
-import {useState, useEffect} from "react";
-import {useRef} from "react";
+import { useRef } from "react";
 
 /**
 useRef allows you to persist a value between renders
@@ -26,7 +25,7 @@ const { initialMount } = obj; // undefined, there's no "initialMount" key, since
 */
 
 
-function GuessDisplay({guesses, setGuesses, ANIMATIONTIME}) {
+function GuessDisplay({guesses, ANIMATIONTIME}) {
     const mountCount = useRef(0);
     const initialMount = useRef(true);
 
@@ -36,19 +35,7 @@ function GuessDisplay({guesses, setGuesses, ANIMATIONTIME}) {
         initialMount.current = false;
     }
 
-
-    function capitalize(s) {
-        return s.charAt(0).toUpperCase() + s.slice(1);
-    }
-
-    function capitalizeAll(s) {
-        let arr = s.split(" "); // turns it into an array separated by spaces
-        arr = arr.map((word) => capitalize(word)); // No { } means implicit return in one line, map applies function to each item and return array
-        return arr.join(" "); // Puts items of array together and separates by space
-    }
-
     // .map() takes an anonymous function that can take 3 args, but does not need to all: (currentValue, index, originalArray)
-
     return (
         <div className="GuessDisplay">
             <div className="grid">
@@ -60,7 +47,7 @@ function GuessDisplay({guesses, setGuesses, ANIMATIONTIME}) {
                     lastTile = "tile-flip";
                 }
 
-                // r/w = right/wrong, h/l = higher/lower
+                // r/w = right/wrong, h/l = higher/lower -> THE TYPE IS NOT ACUALLY USED ANYWHERE IN Tile.jsx
                 // Format: // guess = {name, correct, dimension, hostility, hp, movement, height, tameable, release}
                 // Since the index of the first is always 0, don't use as key since doing so means React sees this first element on key=(index=0) as the same element on re-render
                 // where the class has not changed, it has .tile-flip on previous render and now the same, so the animation does not trigger since class is constant on render
