@@ -1,0 +1,176 @@
+.GiveUpModal {
+    width: 70%;
+    height: 50%;
+    padding: 60px;
+    font-family: "Tiny5", sans-serif;
+    color: white;
+    user-select: none;
+
+}
+
+.GiveUpModal p {
+    font-size: 5vh;
+    text-align: center;
+    margin: 0;
+    opacity: 0;
+    animation: riseIn 2s ease-in-out forwards;
+}
+
+.GiveUpModal .sub-text {
+    font-size: 1.5vw;
+    animation: fadeIn 1.5s ease-in-out forwards 1.5s;
+}
+
+.GiveUpModal button {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 100px;
+    padding-right: 100px;
+    /* Looks at nearest position: relative; element to reference for coordinates. 
+    Children of the same parent that are NOT specified position:...; do not move at all relative to this position, they can literally overlap over each other */
+    user-select: none;
+    background-color: gray;
+    font-family: "Tiny5", sans-serif;
+    font-size: 15px;
+    color: white;
+
+    border-top: 3px solid #d1d5db;
+    border-left: 3px solid #d1d5db;
+    border-right: 3px solid #4b5563;
+    border-bottom: 5px solid #4b5563;
+    box-shadow: 0 0 0 2px #000000;
+}
+
+.GiveUpModal button:hover {
+    box-shadow: 0 0 0 2px #fdfdfd; 
+}
+
+.GiveUpModal .confirm-give-up-button {
+    opacity: 0;
+    animation: fadeIn 1s ease-in-out forwards 3s;
+}
+
+.GiveUpModal .cancel-button {
+    opacity: 0;
+    animation: fadeIn 1s ease-in-out forwards 3.5s;
+}
+
+.GiveUpModal .button-container {
+    display: flex;
+    justify-content: center;
+    gap: 5vw;
+    margin-top: 100px;
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes dropIn {
+  0% {
+    opacity: 0;
+    transform: translateY(-50px);
+    /* Starts 50px higher */
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+    /* Ends at its natural position */
+  }
+}
+
+@keyframes riseIn {
+  0% {
+    opacity: 0;
+    transform: translateY(50px);
+    /* Starts 50px higher */
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+    /* Ends at its natural position */
+  }
+}
+
+
+@media (max-width: 1100px) {
+    .GiveUpModal {
+        width: 90%;
+        height: 40%;
+        padding: 10px;
+    }
+
+    .GiveUpModal p {
+        font-size: 5vw;
+    }
+
+    .GiveUpModal .sub-text {
+        font-size: 3vw;
+    }
+
+    .GiveUpModal button {
+        padding-top: 10px;
+    }
+
+    .GiveUpModal .button-container {
+        margin-top: 80px;
+    }
+}
+
+@media (max-width: 720px) {
+    .GiveUpModal p {
+        font-size: 6vw;
+    }
+
+    .GiveUpModal button {
+        padding-top: 10px;
+        padding-bottom: 10px;
+        padding-left: 80px;
+        padding-right: 80px;
+    }
+}
+
+@media (max-width: 500px) {
+    .GiveUpModal {
+        width: 100%;
+        padding: 10px;
+    }
+
+    .GiveUpModal p {
+        font-size: 6.5vw;
+        width: 100%;
+    }
+
+    .GiveUpModal .sub-text {
+        font-size: 4vw;
+    }
+
+    .GiveUpModal button {
+        width: 35%;
+        padding-top: 8px;
+        padding-bottom: 8px;
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+
+    .GiveUpModal .button-container {
+        margin-top: 50px;
+        flex-direction: column;
+        align-items: center;
+    }
+}
+
+@media (max-width: 300px) {
+    .GiveUpModal button {
+        padding-top: 3px;
+        padding-bottom: 3px;
+    }   
+}

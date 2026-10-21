@@ -1,6 +1,7 @@
 import './css/App.css';
 import GuessArea from "./GuessArea";
 import GuessDisplay from './GuessDisplay';
+import GiveUpModal from './GiveUpModal.jsx';
 import mobs from './data/mobs.js';
 import { useState, useEffect } from "react";
 
@@ -13,6 +14,7 @@ function App() {
   const [copied, setCopied] = useState(false);
   const [gaveUp, setGaveUp] = useState(false);
   const [disabled, setDisabled] = useState(false);
+  const [renderGiveUpModal, setRenderGiveUpModal] = useState(false);
 
   // Non-functional code that just uses each .gif so that there is no initial-fetch lag the first time they are needed in DropDown menu
   useEffect(() => {
@@ -75,8 +77,12 @@ function App() {
 
   return (
     <div className="App">
+      {renderGiveUpModal &&
+      <div className='give-up-dark-overlay'>
+        <GiveUpModal handleGiveUp={handleGiveUp} setRenderGiveUpModal={setRenderGiveUpModal} />
+      </div>}
       <div className='title-area'>
-        <button className='give-up-button' onClick={handleGiveUp} disabled={disabled || gotCorrect}>Give Up ☹</button>
+        <button className='give-up-button' onClick={() => setRenderGiveUpModal(true)} disabled={disabled || gotCorrect}>Give Up ☹</button>
         <p className='under-title'>The Minecraft Mob Guessing Game</p>
         <img src='/title_text.png' className='main-title' draggable={false}/>
       </div>
