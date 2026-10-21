@@ -13,12 +13,12 @@
     text-align: center;
     margin: 0;
     opacity: 0;
-    animation: riseIn 2s ease-in-out forwards;
+    animation: riseIn 1s ease-in-out forwards;
 }
 
 .GiveUpModal .sub-text {
     font-size: 1.5vw;
-    animation: fadeIn 1.5s ease-in-out forwards 1.5s;
+    animation: fadeIn 1.5s ease-in-out forwards 1s;
 }
 
 .GiveUpModal button {
@@ -47,12 +47,12 @@
  
 .GiveUpModal .confirm-give-up-button {
     opacity: 0;
-    animation: fadeIn 1s ease-in-out forwards 3s;
+    animation: fadeIn 1s ease-in-out forwards 2.5s;
 }
 
 .GiveUpModal .cancel-button {
     opacity: 0;
-    animation: fadeIn 1s ease-in-out forwards 3.5s;
+    animation: fadeIn 1s ease-in-out forwards 3s;
 }
 
 .GiveUpModal .button-container {
