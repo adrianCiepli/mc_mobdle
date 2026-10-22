@@ -72,6 +72,7 @@ function App() {
   // ===========================================
 
   const handleGiveUp = () => {
+    setRenderGiveUpModal(false);
     setGaveUp(true);
   }
 
