@@ -85,7 +85,7 @@ function GuessArea({ guesses, setGuesses, setGotCorrect, ANIMATIONTIME, gaveUp, 
         const scalar = 4; // default size, multiplier
         const thumbsDown = confetti.shapeFromText({text: '👎', scalar})
         const heartBreak = confetti.shapeFromText({text: '💔', scalar})
-        const defaults = { shapes: [thumbsDown, heartBreak], scalar: scalar, startVelocity: 15, angle: -90, spread: 45, 
+        const defaults = { shapes: [thumbsDown, heartBreak], scalar: scalar, startVelocity: 8, angle: -90, spread: 10, 
                             ticks: 90, zIndex: 0, flat: true, gravity: 0.1 };
 
         function randomInRange(min, max) {
