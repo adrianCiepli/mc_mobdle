@@ -85,14 +85,21 @@ function GuessArea({ guesses, setGuesses, setGotCorrect, ANIMATIONTIME, gaveUp, 
         const scalar = 4; // default size, multiplier
         const thumbsDown = confetti.shapeFromText({text: '👎', scalar})
         const heartBreak = confetti.shapeFromText({text: '💔', scalar})
-        const defaults = { shapes: [thumbsDown, heartBreak], scalar: scalar, startVelocity: 8, angle: -90, spread: 10, 
+        const defaults = { startVelocity: 8, angle: -90, spread: 20, 
                             ticks: 90, zIndex: 0, flat: true, gravity: 0.1 };
+
+        let flipper = 0;
 
         function randomInRange(min, max) {
             return Math.random() * (max - min) + min;
         }
 
         var interval = setInterval(function () { // runs function repeatedly on ms interval, starting at 0
+            flipper = 1 - flipper;
+            let shape = thumbsDown;
+            if (flipper === 1) {
+                shape = heartBreak
+            }
             const timeLeft = animationEnd - Date.now(); // ms
 
             if (timeLeft <= 0) {
@@ -102,8 +109,10 @@ function GuessArea({ guesses, setGuesses, setGotCorrect, ANIMATIONTIME, gaveUp, 
             // var particleCount = 8 * (timeLeft / duration);
             const particleCount = 8;
             // since particles fall down, start a bit higher than random
-            confetti({ ...defaults, particleCount, origin: { x: randomInRange(0.1, 0.3), y: randomInRange(0.2, 0.7) } });
-            confetti({ ...defaults, particleCount, origin: { x: randomInRange(0.7, 0.9), y: randomInRange(0.2, 0.7) } });
+            confetti({ ...defaults, shapes: [shape], scalar, particleCount, 
+                        origin: { x: randomInRange(0.1, 0.3), y: randomInRange(0.2, 0.7) } });
+            confetti({ ...defaults, shapes: [shape], scalar: scalar, particleCount, 
+                        origin: { x: randomInRange(0.7, 0.9), y: randomInRange(0.2, 0.7) } });
         }, duration / amountBursts);
     }
 
