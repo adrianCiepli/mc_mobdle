@@ -8,7 +8,6 @@ import { useState, useEffect } from "react";
 function App() {
   const [guesses, setGuesses] = useState([]); // Format: // guess = {name, correct, dimension, hostility, hp, movement, height, tameable, release}
   const ANIMATIONTIME = 4.5; // seconds, time for a new guess tile-row to fully flip over
-  const mobNames = Object.keys(mobs);
   const [gotCorrect, setGotCorrect] = useState(false);
   const [guessShareable, setGuessShareable] = useState("");
   const [copied, setCopied] = useState(false);
