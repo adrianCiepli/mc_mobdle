@@ -99,7 +99,8 @@ function GuessArea({ guesses, setGuesses, setGotCorrect, ANIMATIONTIME, gaveUp, 
                 return clearInterval(interval); // this is why we store interval variable, so we can force stop the repeated execution
             }
 
-            var particleCount = 10 * (timeLeft / duration);
+            // var particleCount = 8 * (timeLeft / duration);
+            const particleCount = 8;
             // since particles fall down, start a bit higher than random
             confetti({ ...defaults, particleCount, origin: { x: randomInRange(0.1, 0.3), y: randomInRange(0.2, 0.7) } });
             confetti({ ...defaults, particleCount, origin: { x: randomInRange(0.7, 0.9), y: randomInRange(0.2, 0.7) } });
