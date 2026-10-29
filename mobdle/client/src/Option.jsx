@@ -1,7 +1,10 @@
 import "./css/Option.css";
+import { useUIContext } from "./contexts/UIContext";
 
 function Option({ name, handleSubmit }) {
     const imgPath = "/" + name + ".gif";
+
+    const uiContext = useUIContext();
 
     return(
         // onMouseDown gets detected before the focus listeners detect that null gained focus and input lost it
@@ -41,7 +44,7 @@ function Option({ name, handleSubmit }) {
          * To get around our problem, just pass the value we need to use in the handleSubmit inside the function itself, not in a state change where the handler would
          * happen first and THEN update the state, this way we actually get the current value
          */
-        <div className="Option" onMouseDown={(e) => {handleSubmit(e, name)}}>
+        <div className="Option" onMouseDown={(e) => {uiContext.playButtonClick(); handleSubmit(e, name)}}>
             <img src={imgPath} alt="Image" />
             <div className="name">{name}</div>
         </div>

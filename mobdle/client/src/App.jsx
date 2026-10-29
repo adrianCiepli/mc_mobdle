@@ -3,6 +3,7 @@ import GuessArea from "./GuessArea";
 import GuessDisplay from './GuessDisplay';
 import GiveUpModal from './GiveUpModal.jsx';
 import mobs from './data/mobs.js';
+import { useUIContext } from './contexts/UIContext.jsx';
 import { useState, useEffect } from "react";
 
 function App() {
@@ -14,6 +15,8 @@ function App() {
   const [gaveUp, setGaveUp] = useState(false);
   const [disabled, setDisabled] = useState(false);
   const [renderGiveUpModal, setRenderGiveUpModal] = useState(false);
+
+  const uiContext = useUIContext();
 
   // Non-functional code that just uses each .gif so that there is no initial-fetch lag the first time they are needed in DropDown menu
   useEffect(() => {
@@ -63,6 +66,7 @@ function App() {
   const handleCopy = () => {
     navigator.clipboard.writeText(guessShareable).then(() => { // It's an async function that returns a Promise, put code that runs after copying is done here:
       setCopied(true);
+      uiContext.playButtonClick();
       setTimeout(() => {
         setCopied(false);
       }, 5000);
@@ -71,6 +75,7 @@ function App() {
   // ===========================================
 
   const handleGiveUp = () => {
+    uiContext.playButtonClick();
     setRenderGiveUpModal(false);
     setGaveUp(true);
   }
