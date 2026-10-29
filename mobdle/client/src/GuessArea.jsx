@@ -79,14 +79,14 @@ function GuessArea({ guesses, setGuesses, setGotCorrect, ANIMATIONTIME, gaveUp, 
 
     const playGiveUpStuff = () => {
         // TODO: Audio of 'boo'
-        const amountBursts = 4;
+        const amountBursts = 8;
         const duration = 2 * 1000; // ms
         const animationEnd = Date.now() + duration; // end time relative to user timestamp
-        const scalar = 2; // default size, multiplier
+        const scalar = 4; // default size, multiplier
         const thumbsDown = confetti.shapeFromText({text: '👎', scalar})
         const heartBreak = confetti.shapeFromText({text: '💔', scalar})
         const defaults = { shapes: [thumbsDown, heartBreak], scalar: scalar, startVelocity: 15, angle: -90, spread: 45, 
-                            ticks: 60, zIndex: 0, flat: true, gravity: 0.1 };
+                            ticks: 90, zIndex: 0, flat: true, gravity: 0.1 };
 
         function randomInRange(min, max) {
             return Math.random() * (max - min) + min;
@@ -99,7 +99,7 @@ function GuessArea({ guesses, setGuesses, setGotCorrect, ANIMATIONTIME, gaveUp, 
                 return clearInterval(interval); // this is why we store interval variable, so we can force stop the repeated execution
             }
 
-            var particleCount = 50 * (timeLeft / duration);
+            var particleCount = 10 * (timeLeft / duration);
             // since particles fall down, start a bit higher than random
             confetti({ ...defaults, particleCount, origin: { x: randomInRange(0.1, 0.3), y: randomInRange(0.2, 0.7) } });
             confetti({ ...defaults, particleCount, origin: { x: randomInRange(0.7, 0.9), y: randomInRange(0.2, 0.7) } });
