@@ -82,7 +82,7 @@ function GuessArea({ guesses, setGuesses, setGotCorrect, ANIMATIONTIME, gaveUp, 
         const amountBursts = 6;
         const duration = 2 * 1000; // ms
         const animationEnd = Date.now() + duration; // end time relative to user timestamp
-        const scalar = 4; // default size, multiplier
+        const scalar = 6; // default size, multiplier
         const thumbsDown = confetti.shapeFromText({text: '👎', scalar})
         const heartBreak = confetti.shapeFromText({text: '💔', scalar})
         const defaults = { startVelocity: 8, angle: -90, spread: 20, 
@@ -110,9 +110,9 @@ function GuessArea({ guesses, setGuesses, setGotCorrect, ANIMATIONTIME, gaveUp, 
             const particleCount = 1;
             // since particles fall down, start a bit higher than random
             confetti({ ...defaults, shapes: [shape], scalar, particleCount, 
-                        origin: { x: randomInRange(0.1, 0.3), y: randomInRange(0.2, 0.7) } });
+                        origin: { x: randomInRange(0.1, 0.3), y: randomInRange(0.1, 0.8) } });
             confetti({ ...defaults, shapes: [shape], scalar: scalar, particleCount, 
-                        origin: { x: randomInRange(0.7, 0.9), y: randomInRange(0.2, 0.7) } });
+                        origin: { x: randomInRange(0.7, 0.9), y: randomInRange(0.1, 0.8) } });
         }, duration / amountBursts);
     }
 
