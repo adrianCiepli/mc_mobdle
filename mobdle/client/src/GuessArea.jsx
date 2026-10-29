@@ -79,7 +79,7 @@ function GuessArea({ guesses, setGuesses, setGotCorrect, ANIMATIONTIME, gaveUp, 
 
     const playGiveUpStuff = () => {
         // TODO: Audio of 'boo'
-        const amountBursts = 8;
+        const amountBursts = 6;
         const duration = 2 * 1000; // ms
         const animationEnd = Date.now() + duration; // end time relative to user timestamp
         const scalar = 4; // default size, multiplier
@@ -107,7 +107,7 @@ function GuessArea({ guesses, setGuesses, setGotCorrect, ANIMATIONTIME, gaveUp, 
             }
 
             // var particleCount = 8 * (timeLeft / duration);
-            const particleCount = 8;
+            const particleCount = 1;
             // since particles fall down, start a bit higher than random
             confetti({ ...defaults, shapes: [shape], scalar, particleCount, 
                         origin: { x: randomInRange(0.1, 0.3), y: randomInRange(0.2, 0.7) } });
