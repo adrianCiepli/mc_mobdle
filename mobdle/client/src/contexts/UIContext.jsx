@@ -1,4 +1,5 @@
 import { createContext, useContext, useMemo } from "react";
+import buttonClickFx from '../assets/audio/button-click.mp3';
 
 /**
  * Provider used in main.jsx (the first jsx file "entry point" for this app) that renders <App />
@@ -7,11 +8,11 @@ import { createContext, useContext, useMemo } from "react";
  */
 
 const UIContext = createContext(null);
-const uiClickAudio = new Audio('../assets/audio/button-click.mp3'); // never changes, doesn't need to be a ref in component
+const uiClickAudio = new Audio(buttonClickFx); // never changes, doesn't need to be a ref in component
 
 export function UIProvider({ children }) {
     const playButtonClick = () => {
-        uiClickAudio.currentTime = 0; // sanity check that the mp3 is playing from start
+        uiClickAudio.currentTime = 0.18; // sanity check that the mp3 is playing from start
         uiClickAudio.play().catch(() => {}); // returns promise along the play-time to maybe return error along way
         // Can keep going in parallel past the audio promise
     };

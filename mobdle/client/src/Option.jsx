@@ -44,7 +44,7 @@ function Option({ name, handleSubmit }) {
          * To get around our problem, just pass the value we need to use in the handleSubmit inside the function itself, not in a state change where the handler would
          * happen first and THEN update the state, this way we actually get the current value
          */
-        <div className="Option" onMouseDown={(e) => {uiContext.playButtonClick(); handleSubmit(e, name)}}>
+        <div className="Option" onPointerDown={uiContext.playButtonClick} onMouseDown={(e) => {handleSubmit(e, name)}}>
             <img src={imgPath} alt="Image" />
             <div className="name">{name}</div>
         </div>

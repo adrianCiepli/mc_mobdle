@@ -87,7 +87,7 @@ function App() {
         <GiveUpModal handleGiveUp={handleGiveUp} setRenderGiveUpModal={setRenderGiveUpModal} />
       </div>}
       <div className='title-area'>
-        <button className='give-up-button' onClick={() => {setRenderGiveUpModal(true); uiContext.playButtonClick();}} disabled={disabled || gotCorrect}>Give Up ☹</button>
+        <button className='give-up-button' onPointerDown={uiContext.playButtonClick} onClick={() => {setRenderGiveUpModal(true);}} disabled={disabled || gotCorrect}>Give Up ☹</button>
         <p className='under-title'>The Minecraft Mob Guessing Game</p>
         <img src='/title_text.png' className='main-title' draggable={false}/>
       </div>
