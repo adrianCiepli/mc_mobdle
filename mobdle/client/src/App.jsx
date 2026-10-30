@@ -66,7 +66,6 @@ function App() {
   const handleCopy = () => {
     navigator.clipboard.writeText(guessShareable).then(() => { // It's an async function that returns a Promise, put code that runs after copying is done here:
       setCopied(true);
-      uiContext.playButtonClick();
       setTimeout(() => {
         setCopied(false);
       }, 5000);
@@ -98,7 +97,7 @@ function App() {
         <img src='/title_text.png' className='main-title' draggable={false}/>
       </div>
       {gotCorrect && <div>{copied ? <div className='shareable-guesses clicked'><img src='/checkmark2.png' className='share-button' alt='Checkmark' /><div className='shareable-copy-text'>Copied!</div></div> :
-        <div className='shareable-guesses' onClick={handleCopy}><img src='/share_white.png' className='share-button' alt='Share Button' /><div className='shareable-copy-text'>Share results</div></div>}</div>}
+        <div className='shareable-guesses' onPointerDown={uiContext.playButtonClick} onClick={handleCopy}><img src='/share_white.png' className='share-button' alt='Share Button' /><div className='shareable-copy-text'>Share results</div></div>}</div>}
 
       <div className='guess-area'>
         <GuessArea guesses={guesses} setGuesses={setGuesses} setGotCorrect={setGotCorrect} ANIMATIONTIME={ANIMATIONTIME} gaveUp={gaveUp} setGaveUp={setGaveUp}
