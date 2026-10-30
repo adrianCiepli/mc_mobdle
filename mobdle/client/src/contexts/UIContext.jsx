@@ -7,7 +7,7 @@ import { createContext, useContext, useMemo } from "react";
  */
 
 const UIContext = createContext(null);
-const uiClickAudio = new Audio('./assets/audio/file.mp3'); // never changes, doesn't need to be a ref in component
+const uiClickAudio = new Audio('../assets/audio/button-click.mp3'); // never changes, doesn't need to be a ref in component
 
 export function UIProvider({ children }) {
     const playButtonClick = () => {
