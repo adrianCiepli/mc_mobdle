@@ -228,6 +228,7 @@ so the child's margin has something to push against inside the parent rather tha
   transition: transform 0.2s ease;
   animation: fadeIn 1.5s ease-in-out forwards 2.0s;
   color: white;
+  user-select: none;
 }
 
 .shareable-guesses.clicked {
