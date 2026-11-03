@@ -1,6 +1,5 @@
 .CorrectModal {
     width: 90%;
-    height: 50%;
     padding: 60px;
     font-family: "Tiny5", sans-serif;
     color: white;
@@ -11,29 +10,30 @@
 }
 
 .CorrectModal p {
-    font-size: 5vh;
     text-align: center;
     margin: 0;
     opacity: 0;
 }
 
 .CorrectModal p.main-text {
+    font-size: clamp(45px, 7vw, 70px);
     color: rgb(23, 225, 23);
     animation: riseIn 1s ease-in-out forwards;
 }
 
 .CorrectModal .sub-text {
-    font-size: 2vw;
+    font-size: clamp(25px, 4vw, 45px);
     animation: fadeIn 1.5s ease-in-out forwards 1.2s;
 }
 
 .CorrectModal .mob-img {
     opacity: 0;
+    width: clamp(180px, 30vw, 250px);
     animation: fadeIn 1.5s ease-in-out forwards 1.8s;
 }
 
 .CorrectModal .mob-name {
-    font-size: 4vw;
+    font-size: clamp(30px, 5vw, 50px);
     color: rgb(23, 225, 23);
     animation: dropIn 1.5s ease-in-out forwards 1.8s;
 }
