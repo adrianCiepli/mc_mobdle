@@ -80,6 +80,12 @@ p.text {
     background-position: center;
 }
 
+@media (max-width: 800px) {
+    p.text {
+        font-size: 2.5vw;
+    }
+}
+
 @media (max-width: 500px) {
     .Tile {
         width: 100%;

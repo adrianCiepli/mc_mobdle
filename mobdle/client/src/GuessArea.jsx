@@ -4,7 +4,8 @@ import { useState, useEffect } from "react";
 import mobs from "./data/mobs.js";
 import confetti from "canvas-confetti";
 
-function GuessArea({ guesses, setGuesses, setGotCorrect, ANIMATIONTIME, gaveUp, setGaveUp, disabled, setDisabled }) {
+function GuessArea({ guesses, setGuesses, setGotCorrect, ANIMATIONTIME, gaveUp, setGaveUp, 
+                        disabled, setDisabled, setRenderCorrectModal, setFadingOut }) {
     {/* Have a text field and a dropdown option that changes dynamically with typing */ }
     const [inGuessArea, setInGuessArea] = useState(false);
     const [textContent, setTextContent] = useState("");
@@ -51,30 +52,6 @@ function GuessArea({ guesses, setGuesses, setGotCorrect, ANIMATIONTIME, gaveUp, 
         }
         localStorage.date = today;
     }, [])
-
-
-    const playConfetti = () => {
-        const duration = 2 * 1000; // ms
-        const animationEnd = Date.now() + duration;
-        const defaults = { startVelocity: 30, spread: 360, ticks: 60, zIndex: 0 };
-
-        function randomInRange(min, max) {
-            return Math.random() * (max - min) + min;
-        }
-
-        var interval = setInterval(function () { // runs function repeatedly on ms interval, starting at 0
-            const timeLeft = animationEnd - Date.now();
-
-            if (timeLeft <= 0) {
-                return clearInterval(interval); // this is why we store interval variable, so we can force stop the repeated execution
-            }
-
-            var particleCount = 100 * (timeLeft / duration);
-            // since particles fall down, start a bit higher than random
-            confetti({ ...defaults, particleCount, origin: { x: randomInRange(0.1, 0.3), y: Math.random() - 0.2 } });
-            confetti({ ...defaults, particleCount, origin: { x: randomInRange(0.7, 0.9), y: Math.random() - 0.2 } });
-        }, 250);
-    }
 
 
     const playGiveUpStuff = () => {
@@ -176,9 +153,10 @@ function GuessArea({ guesses, setGuesses, setGotCorrect, ANIMATIONTIME, gaveUp, 
         }
         if (value.length > 2 && (isSpecific || mobOptions.length === 1)) {
             if (guesses.some((guess) => guess.name.toLowerCase() === value.toLowerCase())) {
+                // TODO: Add visual responsiveness for this, or remove guessed mobs from being pickable in Option.jsx
+                // (entering the name raw should be ok to leave here as a log or nothing since it would just not do anything maybe, or maybe show something idk)
                 console.log("Already guessed: " + value);
             } else {
-                console.log("Submitting guess: " + value);
 
                 // It's ok to update state here since its inside event listener, which won't auto-run on render
                 // It's dangerous inside of a component's return or loosely somewhere where it updates state but also runs on re-render, causing infinite loop
@@ -194,16 +172,22 @@ function GuessArea({ guesses, setGuesses, setGotCorrect, ANIMATIONTIME, gaveUp, 
                 }).then((resBody) => {
                     const newGuesses = [resBody, ...guesses];
                     setGuesses(newGuesses);
-                    localStorage.guesses = JSON.stringify(newGuesses); 
+                    localStorage.guesses = JSON.stringify(newGuesses);
                     setTextContent("");
                     setDisabled(true);
                     setInGuessArea(false); // bluring handled in TextGuess.jsx
                     if (resBody.correct == "eq") { // Keep input disabled and inGuessArea=false on corrrect guess
-                        console.log("Correct!");
+                        const delay = (ANIMATIONTIME - 0.5) * 1000;
                         setTimeout(() => {
-                            playConfetti();
-                            setGotCorrect(true);
-                        }, (ANIMATIONTIME - 0.5) * 1000);
+                            setRenderCorrectModal(true);
+                            setGotCorrect(true); 
+                            setTimeout(() => {
+                                setFadingOut(true);
+                                setTimeout(() => {
+                                    setRenderCorrectModal(false);
+                                }, 1500); // wait for all elements to fade out, unmount
+                            }, 6200); // time before modal+black starts fading out for 1.5s (CorrectModal.css, App.css)
+                        }, delay);
                     } else {
                         setTimeout(() => { // Put user back in text field after animation on wrong guess
                             setDisabled(false);

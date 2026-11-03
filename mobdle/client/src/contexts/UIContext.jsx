@@ -1,4 +1,5 @@
 import { createContext, useContext, useMemo } from "react";
+import confetti from "canvas-confetti";
 import buttonClickFx from '../assets/audio/button-click.mp3';
 
 /**
@@ -10,16 +11,40 @@ import buttonClickFx from '../assets/audio/button-click.mp3';
 const UIContext = createContext(null);
 const uiClickAudio = new Audio(buttonClickFx); // never changes, doesn't need to be a ref in component
 
+const playSuccessConfetti = () => {
+    const duration = 2000; // ms
+    const animationEnd = Date.now() + duration;
+    const defaults = { startVelocity: 30, angle: 90, spread: 120, ticks: 60, zIndex: 1001 }; // dark overlay is z=1000
+
+    function randomInRange(min, max) {
+        return Math.random() * (max - min) + min;
+    }
+
+    var interval = setInterval(function () { // runs function repeatedly on ms interval, starting at 0
+        const timeLeft = animationEnd - Date.now();
+
+        if (timeLeft <= 0) {
+            return clearInterval(interval); // this is why we store interval variable, so we can force stop the repeated execution
+        }
+
+        var particleCount = 125 * (timeLeft / duration);
+        // since particles fall down, start a bit higher than random
+        confetti({ ...defaults, particleCount, origin: { x: randomInRange(0.1, 0.3), y: Math.random() - 0.2 } });
+        confetti({ ...defaults, particleCount, origin: { x: randomInRange(0.7, 0.9), y: Math.random() - 0.2 } });
+    }, 250);
+}
+
 export function UIProvider({ children }) {
     const playButtonClick = () => {
-        uiClickAudio.currentTime = 0.18; // sanity check that the mp3 is playing from start
+        uiClickAudio.currentTime = 0.18; // start time in seconds for the mp3
         uiClickAudio.play().catch(() => {}); // returns promise along the play-time to maybe return error along way
         // Can keep going in parallel past the audio promise
     };
 
     const value = useMemo(() => ({
         // Saves return value and returns cache if dependencies here have not changed but render was triggered (things should be consts here)
-        playButtonClick: playButtonClick
+        playButtonClick: playButtonClick,
+        playSuccessConfetti: playSuccessConfetti,
     }), []);
 
     return(

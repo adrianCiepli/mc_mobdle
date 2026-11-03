@@ -135,8 +135,10 @@ so the child's margin has something to push against inside the parent rather tha
 }
 
 /* Blocks out the rest of webpage and contains the entire give-up modal as only child */
-.give-up-dark-overlay {
+.dark-screen-cover {
   position: fixed;
+  top: 0;
+  left: 0;
   width: 100%;
   height: 100%;
   z-index: 1000;
@@ -145,7 +147,10 @@ so the child's margin has something to push against inside the parent rather tha
   align-items: center;
   background-color: rgba(0, 0, 0, 0);
   animation: fadeInOverlay 1s ease-in-out forwards;
+}
 
+.dark-screen-cover.fading-out {
+  animation: fadeOutOverlay 1.5s ease-in-out forwards;
 }
 
 @keyframes fadeInOverlay {
@@ -155,6 +160,16 @@ so the child's margin has something to push against inside the parent rather tha
 
   100% {
     background-color: rgba(0, 0, 0, 0.612);
+  }
+}
+
+@keyframes fadeOutOverlay {
+  0% {
+    background-color: rgba(0, 0, 0, 0.612);
+  }
+
+  100% {
+    background-color: rgba(0, 0, 0, 0);
   }
 }
 
@@ -213,12 +228,50 @@ so the child's margin has something to push against inside the parent rather tha
   rotate: 15deg;
 }
 
+/*============= SHARE-BUTTON-SHIFT-ANIMATION =============*/
+/* Grid row animating 0fr -> 1fr grows the wrapper from 0 to its content's natural height, sliding the guess area down smoothly */
+/* CSS can't animate from height:0 to height:auto since auto is not an actual number to keyframe, so this allows fading into nataural height */
+/* Now, when this whole button-area appears, it animates from a grid with 1 row with 1 child 0 height to button height */
+/*
+grid-template-rows	Row height (if the button area is 60px tall)
+    0fr	                0 × 60 = 0px
+    0.5fr	              0.5 × 60 = 30px
+    1fr	                1 × 60 = 60px
+
+So share-wrapper is the grid viewed as one box with varying height above GuessArea/Display, and varying height animates smoothly
+It's good to have these extra divs on the outside specifically for this since the existing ones have margins and stuff that make it rough
+The actual button fades in on a delay (1.5s as of now) so this animation expands to fit the button while it mounts but is still invisible,
+THEN after the button fades in itself with its own animation.
+Does NOT visually show on refresh if game ended already, because the whole lower part fades in for 1.5s on 1.8s delay
+so this animation DOES play and the grid does expand and push things down, but not while visible due to fadeIns
+No columns defined, so it defaults to 1, and the children here go next to each other and their heights are the max container height
+Further research into CSS grid is recommended to understand its mechanics to be able to understand what defaults exist based on what customization exists
+*/
+.share-wrapper {
+  display: grid;
+  grid-template-rows: 0fr;
+  animation: expandShare 0.6s ease-in-out forwards;
+}
+
+/* This is the only grid child, must be allowed to shrink below its content */
+.share-grid-child {
+  min-height: 0; /* Overrides default min-height to fit-child-content (share-button img+text) */
+  overflow: hidden; /* Makes it so if this container is smaller than content, the child gets cut-off past boundary visually */
+}
+
+@keyframes expandShare {
+  to {
+    grid-template-rows: 1fr;
+  }
+}
+
 .shareable-guesses {
   opacity: 0;
   display: flex;
   width: fit-content;
   /*margin: 0 auto; Shorthand for <top-down> <right-left> auto will evenly distribute since margin-left and right are auto, so it centers on the width*/
   margin-top: 15px;
+  margin-bottom: 5px; /* room inside .share-clip so the hover scale(1.15) isn't clipped */
   margin-left: auto;
   margin-right: auto;
   flex-direction: column;
@@ -226,7 +279,7 @@ so the child's margin has something to push against inside the parent rather tha
   align-items: center;
   cursor: pointer;
   transition: transform 0.2s ease;
-  animation: fadeIn 1.5s ease-in-out forwards 2.0s;
+  animation: fadeIn 1.5s ease-in-out forwards 1.5s; /* starts as .share-wrapper finishes expanding */
   color: white;
   user-select: none;
 }

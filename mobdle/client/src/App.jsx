@@ -5,16 +5,20 @@ import GiveUpModal from './GiveUpModal.jsx';
 import mobs from './data/mobs.js';
 import { useUIContext } from './contexts/UIContext.jsx';
 import { useState, useEffect } from "react";
+import CorrectModal from './CorrectModal.jsx';
 
 function App() {
   const [guesses, setGuesses] = useState([]); // Format: // guess = {name, correct, dimension, hostility, hp, movement, height, tameable, release}
   const ANIMATIONTIME = 4.5; // seconds, time for a new guess tile-row to fully flip over
   const [gotCorrect, setGotCorrect] = useState(false);
+  const [correctGuess, setCorrectGuess] = useState("");
   const [guessShareable, setGuessShareable] = useState("");
   const [copied, setCopied] = useState(false);
   const [gaveUp, setGaveUp] = useState(false);
   const [disabled, setDisabled] = useState(false);
   const [renderGiveUpModal, setRenderGiveUpModal] = useState(false);
+  const [renderCorrectModal, setRenderCorrectModal] = useState(false);
+  const [fadingOut, setFadingOut] = useState(false);
 
   const uiContext = useUIContext();
 
@@ -27,6 +31,14 @@ function App() {
     const img = new Image();
     img.src = '/share_white.png';
   }, []);
+
+  // For the Correct Modal, needs the name of answer for image
+  useEffect(() => {
+    if (gotCorrect) {
+      // Has to be first guess
+      setCorrectGuess(guesses[0].name);
+    }
+  }, [gotCorrect]);
 
   // Share button functionality
   // ===========================================
@@ -88,20 +100,32 @@ function App() {
   return (
     <div className="App">
       {renderGiveUpModal &&
-      <div className='give-up-dark-overlay'>
+      <div className='dark-screen-cover'>
         <GiveUpModal handleGiveUp={handleGiveUp} setRenderGiveUpModal={setRenderGiveUpModal} />
+      </div>}
+      {renderCorrectModal &&
+      <div className={'dark-screen-cover ' + (fadingOut ? 'fading-out' : '')}>
+        <CorrectModal name={correctGuess} fadingOut={fadingOut} />
       </div>}
       <div className='title-area'>
         <button className='give-up-button' onPointerDown={pointerDownGiveUp} onClick={() => {setRenderGiveUpModal(true);}} disabled={disabled || gotCorrect}>Give Up ☹</button>
         <p className='under-title'>The Minecraft Mob Guessing Game</p>
         <img src='/title_text.png' className='main-title' draggable={false}/>
       </div>
-      {gotCorrect && <div>{copied ? <div className='shareable-guesses clicked'><img src='/checkmark2.png' className='share-button' alt='Checkmark' /><div className='shareable-copy-text'>Copied!</div></div> :
-        <div className='shareable-guesses' onPointerDown={uiContext.playButtonClick} onClick={handleCopy}><img src='/share_white.png' className='share-button' alt='Share Button' /><div className='shareable-copy-text'>Share results</div></div>}</div>}
+      {gotCorrect &&
+      <div className='share-wrapper'>
+        <div className='share-grid-child'>
+          <div className={'shareable-guesses ' + (copied ? 'clicked' : '')}
+                onPointerDown={copied ? undefined : uiContext.playButtonClick} onClick={copied ? undefined : handleCopy}>
+            <img src={copied ? '/checkmark2.png' : '/share_white.png'} className='share-button' alt={copied ? 'Checkmark' : 'Share Button'} />
+            <div className='shareable-copy-text'>{copied ? 'Copied!' : 'Share results'}</div>
+          </div>
+        </div>
+      </div>}
 
       <div className='guess-area'>
         <GuessArea guesses={guesses} setGuesses={setGuesses} setGotCorrect={setGotCorrect} ANIMATIONTIME={ANIMATIONTIME} gaveUp={gaveUp} setGaveUp={setGaveUp}
-                    disabled={disabled} setDisabled={setDisabled} />
+                    disabled={disabled} setDisabled={setDisabled} setRenderCorrectModal={setRenderCorrectModal} setFadingOut={setFadingOut} />
       </div>
       <div className='guess-display'>
         <GuessDisplay guesses={guesses} ANIMATIONTIME={ANIMATIONTIME} />
